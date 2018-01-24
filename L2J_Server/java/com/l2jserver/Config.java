@@ -778,6 +778,10 @@ public final class Config
 	public static int KARMA_RATE_DROP_EQUIP_WEAPON;
 	public static double[] PLAYER_XP_PERCENT_LOST;
 
+	public static float RATE_DROP_ITEMS_MIN_MAX_MULTIPLIER;
+	public static float RATE_RAID_DROP_ITEMS_MIN_MAX_MULTIPLIER;
+	public static float RATE_DROP_SPOIL_MIN_MAX_MULTIPLE;
+	public static TIntFloatHashMap RATE_DROP_ITEMS_BY_ID_MIN_MAX_MULTIPLIER;
 
 	//--------------------------------------------------
 	// Seven Signs Settings
@@ -1958,6 +1962,33 @@ public final class Config
 					KARMA_RATE_DROP_ITEM = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropItem", "50"));
 					KARMA_RATE_DROP_EQUIP = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropEquip", "40"));
 					KARMA_RATE_DROP_EQUIP_WEAPON = Integer.parseInt(ratesSettings.getProperty("KarmaRateDropEquipWeapon", "10"));
+
+					RATE_DROP_ITEMS_MIN_MAX_MULTIPLIER = Float.parseFloat(ratesSettings.getProperty("RateDropItemsMinMaxMultiplier", "1."));
+					RATE_RAID_DROP_ITEMS_MIN_MAX_MULTIPLIER = Float.parseFloat(ratesSettings.getProperty("RateRaidDropItemsMinMaxMultiplier", "1."));
+					RATE_DROP_SPOIL_MIN_MAX_MULTIPLE = Float.parseFloat(ratesSettings.getProperty("RateDropSpoilMinMaxMultiplier", "1."));
+
+					try {
+						String[] rateDropItemsByIdMinMaxMultiplier = ratesSettings.getProperty("RateDropItemsByIdMinMaxMultiplier", "").split(";");
+						RATE_DROP_ITEMS_BY_ID_MIN_MAX_MULTIPLIER = new TIntFloatHashMap(rateDropItemsByIdMinMaxMultiplier.length);
+
+						for (String item : rateDropItemsByIdMinMaxMultiplier) {
+							String[] itemSplit = item.split(",");
+							if (itemSplit.length != 2) {
+								_log.warning(StringUtil.concat("Config.load(): invalid config property -> RateDropItemsByIdMinMaxMultiplier \"", item, "\""));
+							} else {
+								try	{
+									RATE_DROP_ITEMS_BY_ID_MIN_MAX_MULTIPLIER.put(Integer.parseInt(itemSplit[0]), Float.parseFloat(itemSplit[1]));
+								}	catch (NumberFormatException nfe)	{
+									if (!item.isEmpty()) {
+										_log.warning(StringUtil.concat("Config.load(): invalid config property -> RateDropItemsByIdMinMaxMultiplier \"", item, "\""));
+									}
+								}
+							}
+						}
+					} catch (Exception e) {
+						_log.warning("Error while loading Rate Drop Items By Id Min Max Multiplier");
+						e.printStackTrace();
+					}
 
 					// Initializing table
 					PLAYER_XP_PERCENT_LOST = new double[Byte.MAX_VALUE+1];

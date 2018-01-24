@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -344,7 +344,7 @@ public class L2Attackable extends L2Npc
 	{
 		return (AttackableKnownList)super.getKnownList();
 	}
-	
+
 	@Override
     public void initKnownList()
     {
@@ -356,7 +356,7 @@ public class L2Attackable extends L2Npc
 	{
 		return (AttackableStatus) super.getStatus();
 	}
-	
+
 	@Override
 	public void initCharStatus()
 	{
@@ -427,7 +427,7 @@ public class L2Attackable extends L2Npc
 	@Override
 	public void reduceCurrentHp(double damage, L2Character attacker, boolean awake, boolean isDOT, L2Skill skill)
 	{
-		if (isRaid() && !(this instanceof L2MinionInstance) && attacker != null && attacker.getParty() != null 
+		if (isRaid() && !(this instanceof L2MinionInstance) && attacker != null && attacker.getParty() != null
 				&& attacker.getParty().isInCommandChannel() && attacker.getParty().getCommandChannel().meetRaidWarCondition(this))
 		{
 			if (_firstCommandChannelAttacked == null) //looting right isn't set
@@ -447,7 +447,7 @@ public class L2Attackable extends L2Npc
 					}
 				}
 			}
-			else if (attacker.getParty().getCommandChannel().equals(_firstCommandChannelAttacked)) //is in same channel 
+			else if (attacker.getParty().getCommandChannel().equals(_firstCommandChannelAttacked)) //is in same channel
 			{
 				_commandChannelLastAttack = System.currentTimeMillis(); // update last attack time
 			}
@@ -861,13 +861,13 @@ public class L2Attackable extends L2Npc
 
 
 	/**
-	 * 
+	 *
 	 * @see com.l2jserver.gameserver.model.actor.L2Character#addAttackerToAttackByList(com.l2jserver.gameserver.model.actor.L2Character)
 	 */
 	@Override
 	public void addAttackerToAttackByList (L2Character player)
 	{
-		if (player == null || player == this || getAttackByList().contains(player)) 
+		if (player == null || player == this || getAttackByList().contains(player))
 			return;
 		getAttackByList().add(player);
 	}
@@ -1095,7 +1095,7 @@ public class L2Attackable extends L2Npc
 			result.add(null);
 		return result;
 	}
-	
+
 	public List<L2Character> getHateList()
 	{
 		if (getAggroList().isEmpty() || isAlikeDead()) return null;
@@ -1156,8 +1156,20 @@ public class L2Attackable extends L2Npc
 		return ai.getHate();
 	}
 
+	private int multiplyMinMaxRate(int rate, int itemId, boolean isSweep) {
+		if (Config.RATE_DROP_ITEMS_BY_ID_MIN_MAX_MULTIPLIER.get(itemId) != 0) {
+			return Math.round(rate * Config.RATE_DROP_ITEMS_BY_ID_MIN_MAX_MULTIPLIER.get(itemId));
+		} else if (isSweep) {
+			return Math.round(rate * Config.RATE_DROP_SPOIL_MIN_MAX_MULTIPLE);
+		} else if (isRaid()) {
+			return Math.round(rate * Config.RATE_RAID_DROP_ITEMS_MIN_MAX_MULTIPLIER);
+		} else {
+			return Math.round(rate * Config.RATE_DROP_ITEMS_MIN_MAX_MULTIPLIER);
+		}
+	}
+
 	/**
-	 * Calculates quantity of items for specific drop acording to current situation 
+	 * Calculates quantity of items for specific drop acording to current situation
 	 *
 	 * @param drop The L2DropData count is being calculated for
 	 * @param lastAttacker The L2PcInstance that has killed the L2Attackable
@@ -1211,9 +1223,10 @@ public class L2Attackable extends L2Npc
 		if (dropChance < 1)
 			dropChance = 1;
 
+
 		// Get min and max Item quantity that can be dropped in one time
-		int minCount = drop.getMinDrop();
-		int maxCount = drop.getMaxDrop();
+		int minCount = multiplyMinMaxRate(drop.getMinDrop(), drop.getItemId(), isSweep);
+		int maxCount = multiplyMinMaxRate(drop.getMaxDrop(), drop.getItemId(), isSweep);
 		int itemCount = 0;
 
 		// Count and chance adjustment for high rate servers
@@ -1258,7 +1271,7 @@ public class L2Attackable extends L2Npc
 	}
 
 	/**
-	 * Calculates quantity of items for specific drop CATEGORY according to current situation 
+	 * Calculates quantity of items for specific drop CATEGORY according to current situation
 	 * Only a max of ONE item from a category is allowed to be dropped.
 	 *
 	 * @param drop The L2DropData count is being calculated for
@@ -1346,8 +1359,8 @@ public class L2Attackable extends L2Npc
 				dropChance = L2DropData.MAX_CHANCE;
 
 			// Get min and max Item quantity that can be dropped in one time
-			int min = drop.getMinDrop();
-			int max = drop.getMaxDrop();
+			int min = multiplyMinMaxRate(drop.getMinDrop(), drop.getItemId(), false);
+			int max = multiplyMinMaxRate(drop.getMaxDrop(), drop.getItemId(), false);
 
 			// Get the item quantity dropped
 			int itemCount = 0;
@@ -1386,7 +1399,7 @@ public class L2Attackable extends L2Npc
 				// TODO (April 11, 2009): Find a way not to hardcode these values.
 				if ((drop.getItemId() == 57 || (drop.getItemId() >= 6360 && drop.getItemId() <= 6362)) && isChampion())
 					itemCount *= Config.L2JMOD_CHAMPION_ADENAS_REWARDS;
-			
+
 			if (!Config.MULTIPLE_ITEM_DROP && !ItemTable.getInstance().getTemplate(drop.getItemId()).isStackable() && itemCount > 1)
 				itemCount = 1;
 
@@ -1436,9 +1449,9 @@ public class L2Attackable extends L2Npc
 	 * Concept:
 	 * During a Special Event all L2Attackable can drop extra Items.
 	 * Those extra Items are defined in the table allNpcDateDrops of the EventDroplist.
-	 * Each Special Event has a start and end date to stop to drop extra Items automaticaly. 
+	 * Each Special Event has a start and end date to stop to drop extra Items automaticaly.
 	 *
-	 * Actions: 
+	 * Actions:
 	 * Manage drop of Special Events created by GM for a defined period
 	 * Get all possible drops of this L2Attackable from L2NpcTemplate and add it Quest drops
 	 * For each possible drops (base + quests), calculate which one must be dropped (random)
@@ -1783,7 +1796,7 @@ public class L2Attackable extends L2Npc
 	 * Concept:
 	 * During a Special Event all L2Attackable can drop extra Items.
 	 * Those extra Items are defined in the table allNpcDateDrops of the EventDroplist.
-	 * Each Special Event has a start and end date to stop to drop extra Items automaticaly. 
+	 * Each Special Event has a start and end date to stop to drop extra Items automaticaly.
 	 *
 	 * Actions: <I>If an extra drop must be generated</I>
 	 * Get an Item Identifier (random) from the DateDrop Item table of this Event
@@ -2663,14 +2676,14 @@ public class L2Attackable extends L2Npc
 
 		return true;
 	}
-	
+
 	/** Return True if the L2Character is RaidBoss or his minion. */
 	@Override
 	public boolean isRaid()
 	{
 		return _isRaid;
 	}
-	
+
 	/**
 	 * Set this Npc as a Raid instance.<BR><BR>
 	 * @param isRaid
@@ -2680,7 +2693,7 @@ public class L2Attackable extends L2Npc
 	{
 		_isRaid = isRaid;
 	}
-	
+
 	/**
 	 * Set this Npc as a Minion instance.<BR><BR>
 	 * @param val
@@ -2691,18 +2704,18 @@ public class L2Attackable extends L2Npc
 		_isRaid = val;
 		_isRaidMinion = val;
 	}
-	
+
 	@Override
 	public boolean isRaidMinion()
 	{
 		return _isRaidMinion;
 	}
-	
+
 	public void setChampion(boolean champ)
 	{
 		_champion = champ;
 	}
-	
+
 	@Override
 	public boolean isChampion()
 	{
