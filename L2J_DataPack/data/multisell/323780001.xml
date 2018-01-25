@@ -52,14 +52,6 @@
 		<ingredient id="13067" count="4671" />
 		<production id="13392" count="1" />
 	</item>
-	<item id="14">
-		<ingredient id="13067" count="55" />
-		<production id="13393" count="1" />
-	</item>
-	<item id="15">
-		<ingredient id="13067" count="55" />
-		<production id="13394" count="1" />
-	</item>
 	<item id="16">
 		<ingredient id="13067" count="64" />
 		<production id="13395" count="1" />

@@ -7,9 +7,6 @@
 			<enchant order="0x0C" stat="mDef" val="0" />
 		</for>
 	</item>
-	<item id="10315" name="Shadow Item - Purple Viking Circlet">
-		<for />
-	</item>
 	<item id="10316" name="Agathion Seal Bracelet - Little Angel - Firecracker">
 		<for />
 	</item>
@@ -23,9 +20,6 @@
 		<for />
 	</item>
 	<item id="10320" name="Agathion Seal Bracelet - Little Angel">
-		<for />
-	</item>
-	<item id="10321" name="Shadow Item - Golden Viking Circlet">
 		<for />
 	</item>
 	<item id="10322" name="Agathion Seal Bracelet - Little Devil - Firecracker">

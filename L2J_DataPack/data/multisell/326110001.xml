@@ -68,11 +68,6 @@
 		<ingredient id="57" count="400000" />
 		<production id="14037" count="1" />
 	</item>
-	<item id="15">
-		<ingredient id="14009" count="50" />
-		<ingredient id="57" count="80000" />
-		<production id="14104" count="1" />
-	</item>
 	<item id="16">
 		<ingredient id="14009" count="200" />
 		<ingredient id="57" count="600000" />

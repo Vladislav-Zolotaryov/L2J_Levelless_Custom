@@ -16,10 +16,6 @@
 		<for>
 		</for>
 	</item>
-	<item id="14104" name="Shadow Item - Collection Agathion Summon Bracelet">
-		<for>
-		</for>
-	</item>
 	<item id="14105" name="Sealed Vesper Breastplate">
 		<for>
 			<add order="0x10" stat="pDef" val="236" />

@@ -36,15 +36,6 @@
 	<item id="13058" name="Silenos Hair Accessory">
 		<for />
 	</item>
-	<item id="13074" name="Shadow Item - Sorcerer Hat">
-		<for />
-	</item>
-	<item id="13075" name="Shadow Item - Black Mask">
-		<for />
-	</item>
-	<item id="13076" name="Shadow Item - Dragonfly Goggle">
-		<for />
-	</item>
 	<item id="13078" name="Arcana Sigil">
 		<cond msgId="1518">
 			<not>

@@ -27,15 +27,6 @@
 	<item id="10424" name="Blue Talisman - Greater Healing">
 		<for />
 	</item>
-	<item id="10470" name="Shadow Item - Red Crescent">
-		<for />
-	</item>
-	<item id="10471" name="Shadow Item - Ring of Devotion">
-		<for />
-	</item>
-	<item id="10472" name="Shadow Item - Necklace of Devotion">
-		<for />
-	</item>
 	<item id="10487" name="Dynasty Jeweled Leather Armor - Force Master">
 		<cond msgId="1518">
 			<player class_id_restriction="88, 114" />

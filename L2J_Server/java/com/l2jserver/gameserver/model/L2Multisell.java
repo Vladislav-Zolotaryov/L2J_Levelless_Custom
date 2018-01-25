@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -44,7 +44,7 @@ public class L2Multisell
 {
 	private static final Logger _log = Logger.getLogger(L2Multisell.class.getName());
 	private final TIntObjectHashMap<MultiSellListContainer> _entries = new TIntObjectHashMap<MultiSellListContainer>();
-	
+
 	/**
 	 * Instantiates a new l2 multisell.
 	 */
@@ -52,7 +52,7 @@ public class L2Multisell
 	{
 		reload();
 	}
-	
+
 	/**
 	 * Gets the single instance of L2Multisell.
 	 *
@@ -62,7 +62,7 @@ public class L2Multisell
 	{
 		return SingletonHolder._instance;
 	}
-	
+
 	/**
 	 * Reload.
 	 */
@@ -72,7 +72,7 @@ public class L2Multisell
 		parse();
 		_log.info("L2Multisell: Loaded " + _entries.size() + " lists.");
 	}
-	
+
 	/**
 	 * Gets the list.
 	 *
@@ -82,14 +82,14 @@ public class L2Multisell
 	public MultiSellListContainer getList(int id)
 	{
 		final MultiSellListContainer list = _entries.get(id);
-		
+
 		if (list != null)
 			return list;
-		
+
 		_log.warning("[L2Multisell] can't find list with id: " + id);
 		return null;
 	}
-	
+
 	/**
 	 * This will generate the multisell list for the items.  There exist various
 	 * parameters in multisells that affect the way they will appear:
@@ -128,18 +128,18 @@ public class L2Multisell
 		list.setListId(listId);
 		if (npcId != 0 && !listTemplate.checkNpcId(npcId))
 			listTemplate.addNpcId(npcId);
-		
+
 		if (inventoryOnly)
 		{
 			if (player == null)
 				return list;
-			
+
 			L2ItemInstance[] items;
 			if (listTemplate.getMaintainEnchantment())
 				items = player.getInventory().getUniqueItemsByEnchantLevel(false, false, false);
 			else
 				items = player.getInventory().getUniqueItems(false, false, false);
-			
+
 			int enchantLevel, elementId, elementValue, augmentId, fireVal, waterVal, windVal, earthVal, holyVal, darkVal;
 			for (L2ItemInstance item : items)
 			{
@@ -161,7 +161,7 @@ public class L2Multisell
 					for (MultiSellEntry ent : listTemplate.getEntries())
 					{
 						boolean doInclude = false;
-						
+
 						// check ingredients of this entry to see if it's an entry we'd like to include.
 						for (MultiSellIngredient ing : ent.getIngredients())
 						{
@@ -171,7 +171,7 @@ public class L2Multisell
 								break;
 							}
 						}
-						
+
 						// manipulate the ingredients of the template entry for this particular instance shown
 						// i.e: Assign enchant levels and/or apply taxes as needed.
 						if (doInclude)
@@ -187,10 +187,10 @@ public class L2Multisell
 			for (MultiSellEntry ent : listTemplate.getEntries())
 				list.addEntry(prepareEntry(ent, listTemplate.getApplyTaxes(), false, 0, 0, -2, 0, 0, 0, 0, 0, 0, 0, taxRate));
 		}
-		
+
 		return list;
 	}
-	
+
 	// Regarding taxation, the following is the case:
 	// a) The taxes come out purely from the adena TaxIngredient
 	// b) If the entry has no adena ingredients other than the taxIngredient, the resulting
@@ -221,12 +221,12 @@ public class L2Multisell
 		MultiSellEntry newEntry = new MultiSellEntry();
 		newEntry.setEntryId(templateEntry.getEntryId() * 100000 + enchantLevel);
 		long adenaAmount = 0;
-		
+
 		for (MultiSellIngredient ing : templateEntry.getIngredients())
 		{
 			// load the ingredient from the template
 			MultiSellIngredient newIngredient = new MultiSellIngredient(ing);
-			
+
 			// if taxes are to be applied, modify/add the adena count based on the template adena/ancient adena count
 			if (ing.getItemId() == PcInventory.ADENA_ID && ing.isTaxIngredient())
 			{
@@ -258,7 +258,7 @@ public class L2Multisell
 					newIngredient.setDarkValue(darkValue);
 				}
 			}
-			
+
 			// finally, add this ingredient to the entry
 			newEntry.addIngredient(newIngredient);
 		}
@@ -272,7 +272,7 @@ public class L2Multisell
 		{
 			// load the ingredient from the template
 			MultiSellIngredient newIngredient = new MultiSellIngredient(ing);
-			
+
 			if (maintainEnchantment)
 			{
 				// if it is an armor/weapon, modify the enchantment level appropriately
@@ -296,7 +296,7 @@ public class L2Multisell
 		}
 		return newEntry;
 	}
-	
+
 	/**
 	 * Separate and send.
 	 *
@@ -311,9 +311,9 @@ public class L2Multisell
 		MultiSellListContainer list = generateMultiSell(listId, inventoryOnly, player, npcId, taxRate);
 		MultiSellListContainer temp = new MultiSellListContainer();
 		int page = 1;
-		
+
 		temp.setListId(list.getListId());
-		
+
 		for (MultiSellEntry e : list.getEntries())
 		{
 			if (temp.getEntries().size() == 40)
@@ -326,17 +326,17 @@ public class L2Multisell
 		}
 		player.sendPacket(new MultiSellList(temp, page, 1));
 	}
-	
+
 	/**
 	 * The Class MultiSellEntry.
 	 */
 	public class MultiSellEntry
 	{
 		private int _entryId;
-		
+
 		private List<MultiSellIngredient> _products = new FastList<MultiSellIngredient>();
 		private List<MultiSellIngredient> _ingredients = new FastList<MultiSellIngredient>();
-		
+
 		/**
 		 * Sets the entry id.
 		 *
@@ -346,7 +346,7 @@ public class L2Multisell
 		{
 			_entryId = entryId;
 		}
-		
+
 		/**
 		 * Gets the entry id.
 		 *
@@ -356,7 +356,7 @@ public class L2Multisell
 		{
 			return _entryId;
 		}
-		
+
 		/**
 		 * Adds the product.
 		 *
@@ -366,7 +366,7 @@ public class L2Multisell
 		{
 			_products.add(product);
 		}
-		
+
 		/**
 		 * Gets the products.
 		 *
@@ -376,7 +376,7 @@ public class L2Multisell
 		{
 			return _products;
 		}
-		
+
 		/**
 		 * Adds the ingredient.
 		 *
@@ -386,7 +386,7 @@ public class L2Multisell
 		{
 			_ingredients.add(ingredient);
 		}
-		
+
 		/**
 		 * Gets the ingredients.
 		 *
@@ -396,7 +396,7 @@ public class L2Multisell
 		{
 			return _ingredients;
 		}
-		
+
 		/**
 		 * Stackable.
 		 *
@@ -416,7 +416,7 @@ public class L2Multisell
 			return 1;
 		}
 	}
-	
+
 	/**
 	 * The Class MultiSellIngredient.
 	 */
@@ -425,7 +425,7 @@ public class L2Multisell
 		private int _itemId, _enchantmentLevel, _element, _elementVal, _augment, _fireVal, _waterVal, _windVal, _earthVal, _holyVal, _darkVal;
 		private long _itemCount;
 		private boolean _isTaxIngredient, _maintainIngredient;
-		
+
 		/**
 		 * Instantiates a new multisell ingredient.
 		 *
@@ -438,7 +438,7 @@ public class L2Multisell
 		{
 			this(itemId, itemCount, 0, 0, -2, 0, 0, 0, 0, 0, 0, 0, isTaxIngredient, maintainIngredient);
 		}
-		
+
 		/**
 		 * Instantiates a new multisell ingredient.
 		 *
@@ -474,7 +474,7 @@ public class L2Multisell
 			setIsTaxIngredient(isTaxIngredient);
 			setMaintainIngredient(maintainIngredient);
 		}
-		
+
 		/**
 		 * Instantiates a new multisell ingredient.
 		 *
@@ -497,7 +497,7 @@ public class L2Multisell
 			_holyVal = e.getHolyVal();
 			_darkVal = e.getDarkVal();
 		}
-		
+
 		/**
 		 * Sets the augment id.
 		 *
@@ -507,7 +507,7 @@ public class L2Multisell
 		{
 			_augment = augment;
 		}
-		
+
 		/**
 		 * Sets the element id.
 		 *
@@ -517,7 +517,7 @@ public class L2Multisell
 		{
 			_element = element;
 		}
-		
+
 		/**
 		 * Sets the element value.
 		 *
@@ -527,7 +527,7 @@ public class L2Multisell
 		{
 			_elementVal = elementVal;
 		}
-		
+
 		/**
 		 * Sets the fire value.
 		 *
@@ -537,7 +537,7 @@ public class L2Multisell
 		{
 			_fireVal = val;
 		}
-		
+
 		/**
 		 * Sets the water value.
 		 *
@@ -547,7 +547,7 @@ public class L2Multisell
 		{
 			_waterVal = val;
 		}
-		
+
 		/**
 		 * Sets the wind value.
 		 *
@@ -557,7 +557,7 @@ public class L2Multisell
 		{
 			_windVal = val;
 		}
-		
+
 		/**
 		 * Sets the earth value.
 		 *
@@ -567,7 +567,7 @@ public class L2Multisell
 		{
 			_earthVal = val;
 		}
-		
+
 		/**
 		 * Sets the holy value.
 		 *
@@ -577,7 +577,7 @@ public class L2Multisell
 		{
 			_holyVal = val;
 		}
-		
+
 		/**
 		 * Sets the dark value.
 		 *
@@ -587,7 +587,7 @@ public class L2Multisell
 		{
 			_darkVal = val;
 		}
-		
+
 		/**
 		 * Gets the augment id.
 		 *
@@ -597,7 +597,7 @@ public class L2Multisell
 		{
 			return _augment;
 		}
-		
+
 		/**
 		 * Gets the element id.
 		 *
@@ -607,7 +607,7 @@ public class L2Multisell
 		{
 			return _element;
 		}
-		
+
 		/**
 		 * Gets the element val.
 		 *
@@ -617,7 +617,7 @@ public class L2Multisell
 		{
 			return _elementVal;
 		}
-		
+
 		/**
 		 * Gets the fire val.
 		 *
@@ -627,7 +627,7 @@ public class L2Multisell
 		{
 			return _fireVal;
 		}
-		
+
 		/**
 		 * Gets the water val.
 		 *
@@ -637,7 +637,7 @@ public class L2Multisell
 		{
 			return _waterVal;
 		}
-		
+
 		/**
 		 * Gets the wind val.
 		 *
@@ -647,7 +647,7 @@ public class L2Multisell
 		{
 			return _windVal;
 		}
-		
+
 		/**
 		 * Gets the earth val.
 		 *
@@ -657,7 +657,7 @@ public class L2Multisell
 		{
 			return _earthVal;
 		}
-		
+
 		/**
 		 * Gets the holy val.
 		 *
@@ -667,7 +667,7 @@ public class L2Multisell
 		{
 			return _holyVal;
 		}
-		
+
 		/**
 		 * Gets the dark val.
 		 *
@@ -677,7 +677,7 @@ public class L2Multisell
 		{
 			return _darkVal;
 		}
-		
+
 		/**
 		 * Sets the item id.
 		 *
@@ -687,7 +687,7 @@ public class L2Multisell
 		{
 			_itemId = itemId;
 		}
-		
+
 		/**
 		 * Gets the item id.
 		 *
@@ -697,7 +697,7 @@ public class L2Multisell
 		{
 			return _itemId;
 		}
-		
+
 		/**
 		 * Sets the item count.
 		 *
@@ -707,7 +707,7 @@ public class L2Multisell
 		{
 			_itemCount = itemCount;
 		}
-		
+
 		/**
 		 * Gets the item count.
 		 *
@@ -717,7 +717,7 @@ public class L2Multisell
 		{
 			return _itemCount;
 		}
-		
+
 		/**
 		 * Sets the enchantment level.
 		 *
@@ -727,7 +727,7 @@ public class L2Multisell
 		{
 			_enchantmentLevel = enchantmentLevel;
 		}
-		
+
 		/**
 		 * Gets the enchantment level.
 		 *
@@ -737,7 +737,7 @@ public class L2Multisell
 		{
 			return _enchantmentLevel;
 		}
-		
+
 		/**
 		 * Sets the checks if is tax ingredient.
 		 *
@@ -747,7 +747,7 @@ public class L2Multisell
 		{
 			_isTaxIngredient = isTaxIngredient;
 		}
-		
+
 		/**
 		 * Checks if is tax ingredient.
 		 *
@@ -757,7 +757,7 @@ public class L2Multisell
 		{
 			return _isTaxIngredient;
 		}
-		
+
 		/**
 		 * Sets the maintain ingredient.
 		 *
@@ -767,7 +767,7 @@ public class L2Multisell
 		{
 			_maintainIngredient = maintainIngredient;
 		}
-		
+
 		/**
 		 * Gets the maintain ingredient.
 		 *
@@ -778,7 +778,7 @@ public class L2Multisell
 			return _maintainIngredient;
 		}
 	}
-	
+
 	/**
 	 * The Class MultiSellListContainer.
 	 */
@@ -788,9 +788,9 @@ public class L2Multisell
 		private boolean _applyTaxes = false;
 		private boolean _maintainEnchantment = false;
 		private List<Integer> _npcIds;
-		
+
 		List<MultiSellEntry> _entriesC;
-		
+
 		/**
 		 * Instantiates a new multisell list container.
 		 */
@@ -798,7 +798,7 @@ public class L2Multisell
 		{
 			_entriesC = new FastList<MultiSellEntry>();
 		}
-		
+
 		/**
 		 * Sets the list id.
 		 *
@@ -808,7 +808,7 @@ public class L2Multisell
 		{
 			_listId = listId;
 		}
-		
+
 		/**
 		 * Sets the apply taxes.
 		 *
@@ -818,7 +818,7 @@ public class L2Multisell
 		{
 			_applyTaxes = applyTaxes;
 		}
-		
+
 		/**
 		 * Sets the maintain enchantment.
 		 *
@@ -828,7 +828,7 @@ public class L2Multisell
 		{
 			_maintainEnchantment = maintainEnchantment;
 		}
-		
+
 		/**
 		 * Adds the npc id.
 		 *
@@ -838,7 +838,7 @@ public class L2Multisell
 		{
 			_npcIds.add(objId);
 		}
-		
+
 		/**
 		 * Gets the list id.
 		 *
@@ -848,7 +848,7 @@ public class L2Multisell
 		{
 			return _listId;
 		}
-		
+
 		/**
 		 * Gets the apply taxes.
 		 *
@@ -858,7 +858,7 @@ public class L2Multisell
 		{
 			return _applyTaxes;
 		}
-		
+
 		/**
 		 * Gets the maintain enchantment.
 		 *
@@ -868,7 +868,7 @@ public class L2Multisell
 		{
 			return _maintainEnchantment;
 		}
-		
+
 		/**
 		 * Check npc id.
 		 *
@@ -886,10 +886,10 @@ public class L2Multisell
 				}
 				return false;
 			}
-			
+
 			return _npcIds.contains(npcId);
 		}
-		
+
 		/**
 		 * Adds the entry.
 		 *
@@ -899,7 +899,7 @@ public class L2Multisell
 		{
 			_entriesC.add(e);
 		}
-		
+
 		/**
 		 * Gets the entries.
 		 *
@@ -910,7 +910,7 @@ public class L2Multisell
 			return _entriesC;
 		}
 	}
-	
+
 	/**
 	 * Hash files.
 	 *
@@ -932,7 +932,7 @@ public class L2Multisell
 				hash.add(f);
 		}
 	}
-	
+
 	/**
 	 * Parses the.
 	 */
@@ -942,7 +942,7 @@ public class L2Multisell
 		int id = 0;
 		List<File> files = new FastList<File>();
 		hashFiles("multisell", files);
-		
+
 		for (File f : files)
 		{
 			try
@@ -960,8 +960,7 @@ public class L2Multisell
 			}
 			try
 			{
-				MultiSellListContainer list = parseDocument(doc);
-				list.setListId(id);
+				MultiSellListContainer list = parseDocument(doc, id);
 				_entries.put(id, list);
 			}
 			catch (Exception e)
@@ -970,17 +969,18 @@ public class L2Multisell
 			}
 		}
 	}
-	
+
 	/**
 	 * Parses the document.
 	 *
 	 * @param doc the doc
 	 * @return the multisell list container
 	 */
-	protected MultiSellListContainer parseDocument(Document doc)
+	protected MultiSellListContainer parseDocument(Document doc, int listId)
 	{
 		MultiSellListContainer list = new MultiSellListContainer();
-		
+		list.setListId(listId);
+
 		int entryId = 1;
 		for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling())
 		{
@@ -993,18 +993,18 @@ public class L2Multisell
 						list.setApplyTaxes(false);
 					else
 						list.setApplyTaxes(Boolean.parseBoolean(attribute.getNodeValue()));
-					
+
 					attribute = n.getAttributes().getNamedItem("maintainEnchantment");
 					if (attribute == null)
 						list.setMaintainEnchantment(false);
 					else
 						list.setMaintainEnchantment(Boolean.parseBoolean(attribute.getNodeValue()));
-					
+
 					for (Node d = n.getFirstChild(); d != null; d = d.getNextSibling())
 					{
 						if ("item".equalsIgnoreCase(d.getNodeName()))
 						{
-							MultiSellEntry e = parseEntry(d, entryId++);
+							MultiSellEntry e = parseEntry(d, entryId++, listId);
 							list.addEntry(e);
 						}
 					}
@@ -1012,14 +1012,14 @@ public class L2Multisell
 			}
 			else if ("item".equalsIgnoreCase(n.getNodeName()))
 			{
-				MultiSellEntry e = parseEntry(n, entryId++);
+				MultiSellEntry e = parseEntry(n, entryId++, listId);
 				list.addEntry(e);
 			}
 		}
-		
+
 		return list;
 	}
-	
+
 	/**
 	 * Parses the entry.
 	 *
@@ -1027,59 +1027,59 @@ public class L2Multisell
 	 * @param entryId the entry id
 	 * @return the multisell entry
 	 */
-	protected MultiSellEntry parseEntry(Node n, int entryId)
+	protected MultiSellEntry parseEntry(Node n, int entryId, int listId)
 	{
 		Node first = n.getFirstChild();
 		MultiSellEntry entry = new MultiSellEntry();
-		
+
 		for (n = first; n != null; n = n.getNextSibling())
 		{
 			if ("ingredient".equalsIgnoreCase(n.getNodeName()))
 			{
 				Node attribute;
-				
+
 				int id = Integer.parseInt(n.getAttributes().getNamedItem("id").getNodeValue());
 				long count = Long.parseLong(n.getAttributes().getNamedItem("count").getNodeValue());
 				boolean isTaxIngredient = false, maintainIngredient = false;
-				
+
 				attribute = n.getAttributes().getNamedItem("isTaxIngredient");
-				
+
 				if (attribute != null)
 					isTaxIngredient = Boolean.parseBoolean(attribute.getNodeValue());
-				
+
 				attribute = n.getAttributes().getNamedItem("maintainIngredient");
-				
+
 				if (attribute != null)
 					maintainIngredient = Boolean.parseBoolean(attribute.getNodeValue());
-				
+
 				MultiSellIngredient e = new MultiSellIngredient(id, count, isTaxIngredient, maintainIngredient);
 				entry.addIngredient(e);
-				
-				validateItemId(id);
+
+				validateItemId(id, listId);
 			}
 			else if ("production".equalsIgnoreCase(n.getNodeName()))
 			{
 				int id = Integer.parseInt(n.getAttributes().getNamedItem("id").getNodeValue());
 				long count = Long.parseLong(n.getAttributes().getNamedItem("count").getNodeValue());
-				
+
 				MultiSellIngredient e = new MultiSellIngredient(id, count, false, false);
 				entry.addProduct(e);
-				
-				validateItemId(id);
+
+				validateItemId(id, listId);
 			}
 		}
-		
+
 		entry.setEntryId(entryId);
-		
+
 		return entry;
 	}
-	
+
 	/**
 	 * Validate item id.
 	 *
 	 * @param itemId the item id
 	 */
-	private void validateItemId(int itemId)
+	private void validateItemId(int itemId, int listId)
 	{
 		switch (itemId)
 		{
@@ -1092,11 +1092,11 @@ public class L2Multisell
 			{
 				L2Item template = ItemTable.getInstance().getTemplate(itemId);
 				if (template == null)
-					_log.warning("[L2Multisell] can't find item with itemId: " + itemId);
+					_log.warning("[L2Multisell]["+listId+"] can't find item with itemId: " + itemId);
 			}
 		}
 	}
-	
+
 	/**
 	 * The Class SingletonHolder.
 	 */
