@@ -8,3 +8,6 @@
 - Disable Gracia and Hellbound
 - ~~Make Spellbooks only accessible from drop~~ (Kind'a isn't needed)
 - ~~Remove subskills to allow subs be played as main classes~~
+- Make low level monsters stronger
+- Show grade or original level as title
+- Adjust Alt Click drop colors
