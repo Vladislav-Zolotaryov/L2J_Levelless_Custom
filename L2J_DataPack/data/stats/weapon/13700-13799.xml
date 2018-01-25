@@ -8,12 +8,6 @@
 			<set val="379" order="0x08" stat="pAtkSpd" />
 		</for>
 	</item>
-	<item id="13770" name="Shadow Item - Shield of Yehan Miakesh">
-		<for>
-			<set val="101" order="0x08" stat="sDef" />
-			<set val="20" order="0x08" stat="rShld" />
-		</for>
-	</item>
 	<item id="13789" name="Red Boing Hammer ">
 		<for>
 			<set val="107" order="0x08" stat="pAtk" />

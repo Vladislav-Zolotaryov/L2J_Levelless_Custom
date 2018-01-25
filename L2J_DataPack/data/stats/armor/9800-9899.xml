@@ -1,56 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <list>
-	<item id="9820" name="Shadow Item: Clan Oath Helm">
-		<for>
-			<add order="0x10" stat="pDef" val="37" />
-		</for>
-	</item>
-	<item id="9821" name="Shadow Item: Clan Oath Armor">
-		<for>
-			<add order="0x10" stat="pDef" val="158" />
-		</for>
-	</item>
-	<item id="9822" name="Shadow Item: Clan Oath Gauntlets - Heavy Armor">
-		<for>
-			<add order="0x10" stat="pDef" val="24" />
-		</for>
-	</item>
-	<item id="9823" name="Shadow Item: Clan Oath Sabaton - Heavy Armor">
-		<for>
-			<add order="0x10" stat="pDef" val="24" />
-		</for>
-	</item>
-	<item id="9824" name="Shadow Item: Clan Oath Brigandine">
-		<for>
-			<add order="0x10" stat="pDef" val="119" />
-		</for>
-	</item>
-	<item id="9825" name="Shadow Item: Clan Oath Leather Gloves - Light Armor">
-		<for>
-			<add order="0x10" stat="pDef" val="24" />
-		</for>
-	</item>
-	<item id="9826" name="Shadow Item: Clan Oath Boots - Light Armor">
-		<for>
-			<add order="0x10" stat="pDef" val="24" />
-		</for>
-	</item>
-	<item id="9827" name="Shadow Item: Clan Oath Aketon">
-		<for>
-			<add order="0x10" stat="pDef" val="79" />
-			<add order="0x40" stat="maxMp" val="239" />
-		</for>
-	</item>
-	<item id="9828" name="Shadow Item: Clan Oath Padded Gloves - Robe">
-		<for>
-			<add order="0x10" stat="pDef" val="24" />
-		</for>
-	</item>
-	<item id="9829" name="Shadow Item: Clan Oath Sandals - Robe">
-		<for>
-			<add order="0x10" stat="pDef" val="24" />
-		</for>
-	</item>
 	<item id="9830" name="Improved Apella Helm">
 		<cond msgId="1518">
 			<player pledgeClass="5" /> <!-- Baron -->
