@@ -889,6 +889,9 @@ public final class Config
 	public static String DATAPACK_VERSION;
 	public static int PVP_NORMAL_TIME;
 	public static int PVP_PVP_TIME;
+	public static boolean ALT_PLAYER_DROP_CAN_BE_CRYSTALIZED;
+	public static float ALT_PLAYER_DROP_CRYSTALIZATION_CHANCE;
+	
 	public static enum IdFactoryType
 	{
 		Compaction,
@@ -2366,6 +2369,9 @@ public final class Config
 
 					PVP_NORMAL_TIME = Integer.parseInt(pvpSettings.getProperty("PvPVsNormalTime", "120000"));
 					PVP_PVP_TIME = Integer.parseInt(pvpSettings.getProperty("PvPVsPvPTime", "60000"));
+
+					ALT_PLAYER_DROP_CAN_BE_CRYSTALIZED = Boolean.parseBoolean(pvpSettings.getProperty("AltPlayerDropCanBeCrystalized", "True"));
+					ALT_PLAYER_DROP_CRYSTALIZATION_CHANCE = Float.parseFloat(pvpSettings.getProperty("AltPlayerDropCrystalizationChance", "10."));
 				}
 				catch (Exception e)
 				{

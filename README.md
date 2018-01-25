@@ -3,7 +3,7 @@
 - ~~Adjust manor to 85 level~~
 - Adjust drop rates
 - ~~Tradable/droppable augmented items~~
-- Crystalize on drop
+- ~~Crystalize on drop~~
 - ~~Remove shadow and common items~~
 - Disable Gracia and Hellbound
 - ~~Make Spellbooks only accessible from drop~~ (Kind'a isn't needed)
