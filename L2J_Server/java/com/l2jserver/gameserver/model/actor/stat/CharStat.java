@@ -24,7 +24,7 @@ import com.l2jserver.gameserver.skills.Env;
 import com.l2jserver.gameserver.skills.Stats;
 import com.l2jserver.gameserver.templates.item.L2Weapon;
 import com.l2jserver.gameserver.templates.item.L2WeaponType;
-import com.l2jserver.gameserver.model.actor.instance.L2NpcInstance;
+import com.l2jserver.gameserver.skills.Formulas;
 
 public class CharStat
 {
@@ -309,7 +309,7 @@ public class CharStat
     	if (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
     		bonusAtk = Config.L2JMOD_CHAMPION_ATK;
 
-			bonusAtk = calculateMultipliers(target, bonusAtk, Config.RAID_MATTACK_MULTIPLIER, Config.MONSTER_MATTACK_MULTIPLIER, Config.GUARD_MATTACK_MULTIPLIER);
+			bonusAtk = Formulas.calculateMultipliers(target, bonusAtk, Config.RAID_MATTACK_MULTIPLIER, Config.MONSTER_MATTACK_MULTIPLIER, Config.GUARD_MATTACK_MULTIPLIER);
 
     	double attack = _activeChar.getTemplate().baseMAtk * bonusAtk;
 		// Get the skill type to calculate its effect in function of base stats
@@ -405,7 +405,7 @@ public class CharStat
     	return 1;
 
 		// Get the base MAtk of the L2Character
-		double defence = calculateMultipliers(target, _activeChar.getTemplate().baseMDef, Config.RAID_MDEFENCE_MULTIPLIER, Config.MONSTER_MDEFENCE_MULTIPLIER, Config.GUARD_MDEFENCE_MULTIPLIER);
+		double defence = Formulas.calculateMultipliers(target, _activeChar.getTemplate().baseMDef, Config.RAID_MDEFENCE_MULTIPLIER, Config.MONSTER_MDEFENCE_MULTIPLIER, Config.GUARD_MDEFENCE_MULTIPLIER);
 
 		// Calculate modifiers Magic Attack
 		return (int) calcStat(Stats.MAGIC_DEFENCE, defence, target, skill);
@@ -469,7 +469,7 @@ public class CharStat
 		if  (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
 			bonusAtk = Config.L2JMOD_CHAMPION_ATK;
 
-		bonusAtk = calculateMultipliers(target, bonusAtk, Config.RAID_PATTACK_MULTIPLIER, Config.MONSTER_PATTACK_MULTIPLIER, Config.GUARD_PATTACK_MULTIPLIER);
+		bonusAtk = Formulas.calculateMultipliers(target, bonusAtk, Config.RAID_PATTACK_MULTIPLIER, Config.MONSTER_PATTACK_MULTIPLIER, Config.GUARD_PATTACK_MULTIPLIER);
 		return (int) calcStat(Stats.POWER_ATTACK, _activeChar.getTemplate().basePAtk * bonusAtk, target, null);
 	}
 
@@ -571,25 +571,8 @@ public class CharStat
     	if (_activeChar == null)
     		return 1;
 
-			double pdef = calculateMultipliers(target, _activeChar.getTemplate().basePDef, Config.RAID_PDEFENCE_MULTIPLIER, Config.MONSTER_PDEFENCE_MULTIPLIER, Config.GUARD_PDEFENCE_MULTIPLIER);
+			double pdef = Formulas.calculateMultipliers(target, _activeChar.getTemplate().basePDef, Config.RAID_PDEFENCE_MULTIPLIER, Config.MONSTER_PDEFENCE_MULTIPLIER, Config.GUARD_PDEFENCE_MULTIPLIER);
 			return (int) calcStat(Stats.POWER_DEFENCE, pdef, target, null);
-	}
-
-	public double calculateMultipliers(L2Character target, double baseValue, double raidMultiplier, double monsterMultiplier, double guardMultiplier) {
-		double value = 0;
-		if (target instanceof L2NpcInstance && !_activeChar.isRaid()) {
-			L2NpcInstance npcInstance = (L2NpcInstance) target;
-			if (npcInstance.getTemplate().getType().equals("L2Guard")) {
-				value = baseValue * guardMultiplier;
-			} else {
-				value = baseValue * monsterMultiplier;
-			}
-		} else if (_activeChar.isRaid()) {
-			value = baseValue * raidMultiplier;
-		} else {
-			value = baseValue;
-		}
-		return value;
 	}
 
 	/** Return the Physical Attack range (base+modifier) of the L2Character. */

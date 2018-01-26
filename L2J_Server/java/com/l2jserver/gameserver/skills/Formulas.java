@@ -47,7 +47,7 @@ import com.l2jserver.gameserver.model.zone.type.L2CastleZone;
 import com.l2jserver.gameserver.model.zone.type.L2ClanHallZone;
 import com.l2jserver.gameserver.model.zone.type.L2FortZone;
 import com.l2jserver.gameserver.model.zone.type.L2MotherTreeZone;
-import com.l2jserver.gameserver.model.actor.instance.L2NpcInstance;
+import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.skills.conditions.ConditionPlayerState;
@@ -971,8 +971,8 @@ public final class Formulas
 
 		public static double calculateMultipliers(L2Character cha, double baseValue, double raidMultiplier, double monsterMultiplier, double guardMultiplier) {
 			double value = 0;
-			if (cha instanceof L2NpcInstance && !cha.isRaid()) {
-				L2NpcInstance npcInstance = (L2NpcInstance) cha;
+			if (cha instanceof L2MonsterInstance && !cha.isRaid()) {
+				L2MonsterInstance npcInstance = (L2MonsterInstance) cha;
 				if (npcInstance.getTemplate().getType().equals("L2Guard")) {
 					value = baseValue * guardMultiplier;
 				} else {
@@ -998,6 +998,8 @@ public final class Formulas
 
 		if (Config.L2JMOD_CHAMPION_ENABLE && cha.isChampion())
 			hpRegenMultiplier *= Config.L2JMOD_CHAMPION_HP_REGEN;
+
+		System.out.println("HP regen for character " + cha + " is hpRegenMultiplier " + hpRegenMultiplier);
 
 		if (cha instanceof L2PcInstance)
 		{
@@ -1096,10 +1098,6 @@ public final class Formulas
 		double init = cha.getTemplate().baseMpReg;
 		double mpRegenMultiplier = calculateMultipliers(cha, Config.MP_REGEN_MULTIPLIER, Config.RAID_MP_REGEN_MULTIPLIER, Config.MONSTER_MP_REGEN_MULTIPLIER, Config.GUARD_MP_REGEN_MULTIPLIER);
 		double mpRegenBonus = 0;
-
-		if (cha instanceof L2NpcInstance) {
-			mpRegenMultiplier *= Config.MONSTER_MP_REGEN_MULTIPLIER;
-		}
 
 		if (cha instanceof L2PcInstance)
 		{
