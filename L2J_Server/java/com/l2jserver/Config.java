@@ -788,6 +788,8 @@ public final class Config
 	public static boolean VALUABLE_ITEMS_LIMIT_LOG;
 	public static int VALUABLE_ITEMS_WARNING_LIMIT;
 
+	public static boolean SKIP_CATEGORY_DROP_CHANCE;
+
 	//--------------------------------------------------
 	// Seven Signs Settings
 	//--------------------------------------------------
@@ -1979,6 +1981,8 @@ public final class Config
 					VALUABLE_ITEMS_DETAILED_CALCULATION = Boolean.parseBoolean(ratesSettings.getProperty("ValuableItemsDetailedCalculation", "False"));
 					VALUABLE_ITEMS_LIMIT_LOG = Boolean.parseBoolean(ratesSettings.getProperty("ValuableItemsLimitLog", "False"));
 					VALUABLE_ITEMS_WARNING_LIMIT = Integer.parseInt(ratesSettings.getProperty("ValuableItemsWarningLimit", "50"));
+
+					SKIP_CATEGORY_DROP_CHANCE = Boolean.parseBoolean(ratesSettings.getProperty("SkipCategoryDropChance", "False"));
 
 					try {
 						String[] rateDropItemsByIdMinMaxMultiplier = ratesSettings.getProperty("RateDropItemsByIdMinMaxMultiplier", "").split(";");

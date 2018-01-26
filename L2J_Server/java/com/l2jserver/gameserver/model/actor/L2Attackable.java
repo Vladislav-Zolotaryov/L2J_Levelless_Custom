@@ -1325,7 +1325,7 @@ public class L2Attackable extends L2Npc
 			categoryDropChance = 1;
 
 		// Check if an Item from this category must be dropped
-		if (Rnd.get(L2DropData.MAX_CHANCE) < categoryDropChance)
+		if (Config.SKIP_CATEGORY_DROP_CHANCE || Rnd.get(L2DropData.MAX_CHANCE) < categoryDropChance)
 		{
 			L2DropData drop = categoryDrops.dropOne(isRaid() && !isRaidMinion());
 
@@ -1356,7 +1356,7 @@ public class L2Attackable extends L2Npc
 
 			dropChance = Math.round(dropChance);
 
-			if (dropChance < L2DropData.MAX_CHANCE)
+			if (!Config.SKIP_CATEGORY_DROP_CHANCE && dropChance < L2DropData.MAX_CHANCE)
 				dropChance = L2DropData.MAX_CHANCE;
 
 			// Get min and max Item quantity that can be dropped in one time
@@ -1399,7 +1399,7 @@ public class L2Attackable extends L2Npc
 						_log.warning("Warning, valuable iterations calculation for large number of items " + iterations + " caused by " + lastAttacker);
 					}
 
-					for(int i=0; i < iterations; i++){
+					for(int i = 0; i < iterations; i++){
 						int random = Rnd.get(L2DropData.MAX_CHANCE);
 						if (random < dropChance) {
 							itemCount++;
