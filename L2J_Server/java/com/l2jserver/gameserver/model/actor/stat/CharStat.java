@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -24,6 +24,7 @@ import com.l2jserver.gameserver.skills.Env;
 import com.l2jserver.gameserver.skills.Stats;
 import com.l2jserver.gameserver.templates.item.L2Weapon;
 import com.l2jserver.gameserver.templates.item.L2WeaponType;
+import com.l2jserver.gameserver.model.actor.instance.L2NpcInstance;
 
 public class CharStat
 {
@@ -33,7 +34,7 @@ public class CharStat
 	private long _exp = 0;
 	private int _sp = 0;
 	private byte _level = 1;
-	
+
 	// =========================================================
 	// Constructor
 	public CharStat(L2Character activeChar)
@@ -82,15 +83,15 @@ public class CharStat
 	{
 		if (_activeChar == null || stat == null)
 			return init;
-		
+
 		int id = stat.ordinal();
-		
+
 		Calculator c = _activeChar.getCalculators()[id];
-		
+
 		// If no Func object found, no modifier is applied
 		if (c == null || c.size() == 0)
 			return init;
-		
+
 		// Create and init an Env object to pass parameters to the Calculator
 		Env env = new Env();
 		env.player = _activeChar;
@@ -121,9 +122,9 @@ public class CharStat
 				case STAT_STR:
 				case STAT_WIT:
 					env.value = 1;
-			}			
+			}
 		}
-		
+
 		return env.value;
 	}
 
@@ -165,7 +166,7 @@ public class CharStat
 	{
 		if (_activeChar == null)
 			return 1;
-		
+
 		return (int) calcStat(Stats.STAT_CON, _activeChar.getTemplate().baseCON, null, null);
 	}
 
@@ -180,13 +181,13 @@ public class CharStat
 	{
 		if (_activeChar == null)
 			return 1;
-		
+
 		int criticalHit = (int) Math.round(calcStat(Stats.CRITICAL_RATE, _activeChar.getTemplate().baseCritRate, target, skill)*10.0 + 0.5);
 		criticalHit /= 10;
 		// Set a cap of Critical Hit at 500
 		if (criticalHit > Config.MAX_PCRIT_RATE)
 			criticalHit = Config.MAX_PCRIT_RATE;
-		
+
 		return criticalHit;
 	}
 
@@ -304,11 +305,12 @@ public class CharStat
 	{
     	if (_activeChar == null)
     		return 1;
-    	float bonusAtk = 1;
+    	double bonusAtk = 1;
     	if (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
     		bonusAtk = Config.L2JMOD_CHAMPION_ATK;
-    	if (_activeChar.isRaid())
-    		bonusAtk *= Config.RAID_MATTACK_MULTIPLIER;
+
+			bonusAtk = calculateMultipliers(target, bonusAtk, Config.RAID_MATTACK_MULTIPLIER, Config.MONSTER_MATTACK_MULTIPLIER, Config.GUARD_MATTACK_MULTIPLIER);
+
     	double attack = _activeChar.getTemplate().baseMAtk * bonusAtk;
 		// Get the skill type to calculate its effect in function of base stats
 		// of the L2Character target
@@ -375,7 +377,7 @@ public class CharStat
 	{
 		if (_activeChar == null)
 			return 1;
-		
+
 		double mrate = calcStat(Stats.MCRITICAL_RATE, _activeChar.getTemplate().baseMCritRate, target, skill);
 		if(mrate > Config.MAX_MCRIT_RATE)
 			mrate = Config.MAX_MCRIT_RATE;
@@ -399,15 +401,11 @@ public class CharStat
 	 */
 	public int getMDef(L2Character target, L2Skill skill)
 	{
-    	if (_activeChar == null)
-    		return 1;
+    if (_activeChar == null)
+    	return 1;
 
 		// Get the base MAtk of the L2Character
-		double defence = _activeChar.getTemplate().baseMDef;
-
-		// Calculate modifier for Raid Bosses
-		if (_activeChar.isRaid())
-			defence *= Config.RAID_MDEFENCE_MULTIPLIER;
+		double defence = calculateMultipliers(target, _activeChar.getTemplate().baseMDef, Config.RAID_MDEFENCE_MULTIPLIER, Config.MONSTER_MDEFENCE_MULTIPLIER, Config.GUARD_MDEFENCE_MULTIPLIER);
 
 		// Calculate modifiers Magic Attack
 		return (int) calcStat(Stats.MAGIC_DEFENCE, defence, target, skill);
@@ -458,7 +456,7 @@ public class CharStat
 	{
 		if (_activeChar == null)
 			return 1;
-		
+
 		return calcStat(Stats.P_REUSE, _activeChar.getTemplate().baseMReuseRate, null, skill);
 	}
 
@@ -467,11 +465,11 @@ public class CharStat
 	{
     	if (_activeChar == null)
     		return 1;
-    	float bonusAtk = 1;
+    	double bonusAtk = 1;
 		if  (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
 			bonusAtk = Config.L2JMOD_CHAMPION_ATK;
-		if (_activeChar.isRaid())
-			bonusAtk *= Config.RAID_PATTACK_MULTIPLIER;
+
+		bonusAtk = calculateMultipliers(target, bonusAtk, Config.RAID_PATTACK_MULTIPLIER, Config.MONSTER_PATTACK_MULTIPLIER, Config.GUARD_PATTACK_MULTIPLIER);
 		return (int) calcStat(Stats.POWER_ATTACK, _activeChar.getTemplate().basePAtk * bonusAtk, target, null);
 	}
 
@@ -573,7 +571,25 @@ public class CharStat
     	if (_activeChar == null)
     		return 1;
 
-		return (int) calcStat(Stats.POWER_DEFENCE, (_activeChar.isRaid()) ? _activeChar.getTemplate().basePDef * Config.RAID_PDEFENCE_MULTIPLIER : _activeChar.getTemplate().basePDef, target, null);
+			double pdef = calculateMultipliers(target, _activeChar.getTemplate().basePDef, Config.RAID_PDEFENCE_MULTIPLIER, Config.MONSTER_PDEFENCE_MULTIPLIER, Config.GUARD_PDEFENCE_MULTIPLIER);
+			return (int) calcStat(Stats.POWER_DEFENCE, pdef, target, null);
+	}
+
+	public double calculateMultipliers(L2Character target, double baseValue, double raidMultiplier, double monsterMultiplier, double guardMultiplier) {
+		double value = 0;
+		if (target instanceof L2NpcInstance && !_activeChar.isRaid()) {
+			L2NpcInstance npcInstance = (L2NpcInstance) target;
+			if (npcInstance.getTemplate().getType().equals("L2Guard")) {
+				value = baseValue * guardMultiplier;
+			} else {
+				value = baseValue * monsterMultiplier;
+			}
+		} else if (_activeChar.isRaid()) {
+			value = baseValue * raidMultiplier;
+		} else {
+			value = baseValue;
+		}
+		return value;
 	}
 
 	/** Return the Physical Attack range (base+modifier) of the L2Character. */
@@ -581,7 +597,7 @@ public class CharStat
 	{
 		if (_activeChar == null)
 			return 1;
-		
+
 		if (_activeChar.isTransformed())
 			return _activeChar.getTemplate().baseAtkRange;
 		// Polearm handled here for now. Basically L2PcInstance could have a function
@@ -589,7 +605,7 @@ public class CharStat
 		L2Weapon weaponItem = _activeChar.getActiveWeaponItem();
 		if (weaponItem != null && weaponItem.getItemType() == L2WeaponType.POLE)
 			return (int) calcStat(Stats.POWER_ATTACK_RANGE, 66, null, null);
-		
+
 		return (int) calcStat(Stats.POWER_ATTACK_RANGE, _activeChar.getTemplate().baseAtkRange, null, null);
 	}
 
@@ -607,14 +623,14 @@ public class CharStat
 	{
 		if (_activeChar == null)
 			return 1;
-		
+
 		// err we should be adding TO the persons run speed
 		// not making it a constant
 		double baseRunSpd = _activeChar.getTemplate().baseRunSpd;
-		
+
 		if (baseRunSpd == 0)
 			return 0;
-		
+
 		return (int) Math.round(calcStat(Stats.RUN_SPEED, baseRunSpd, null, null));
 	}
 
@@ -648,12 +664,12 @@ public class CharStat
 	{
 		if (_activeChar == null)
 			return 1;
-		
+
 		double baseWalkSpd = _activeChar.getTemplate().baseWalkSpd;
-		
+
 		if (baseWalkSpd == 0)
 			return 0;
-		
+
 		return (int) calcStat(Stats.WALK_SPEED, baseWalkSpd, null, null);
 	}
 
@@ -679,7 +695,7 @@ public class CharStat
 					&& _activeChar.getDanceCount() > 0)
 				mpConsume += _activeChar.getDanceCount() * skill.getNextDanceMpCost();
 		}
-		
+
 		mpConsume = calcStat(Stats.MP_CONSUME, mpConsume, null, skill);
 
 		if (skill.isDance())
@@ -712,7 +728,7 @@ public class CharStat
 		// 1st order - weapon element
 		if (weaponInstance != null && weaponInstance.getAttackElementType() >= 0 )
 			return weaponInstance.getAttackElementType();
-		
+
 		// temp fix starts
 		int tempVal =0, stats[] = { 0, 0, 0, 0, 0, 0 };
 
@@ -735,9 +751,9 @@ public class CharStat
 
 		return returnVal;
 		// temp fix ends
-		
+
 		/*
-		 * uncomment me once deadlocks in getAllEffects() fixed 
+		 * uncomment me once deadlocks in getAllEffects() fixed
 			return _activeChar.getElementIdFromEffects();
 		*/
 	}
@@ -762,7 +778,7 @@ public class CharStat
 			return 0;
 		}
 	}
-	
+
 	public int getDefenseElementValue(byte defenseAttribute)
 	{
 		switch (defenseAttribute)

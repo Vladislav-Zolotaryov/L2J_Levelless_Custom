@@ -13112,8 +13112,8 @@ public final class L2PcInstance extends L2Playable
     			&& !(TvTEvent.isStarted() && TvTEvent.isPlayerParticipant(getObjectId()))
     			&& !(this.isInsideZone(L2Character.ZONE_PVP)||this.isInsideZone(L2Character.ZONE_SIEGE)))
 
-				if (DEATH_PENALTY_CHANCE > 0) {
-					increaseDeathPenaltyBuffLevel();	
+				if (Config.DEATH_PENALTY_CHANCE > 0) {
+					increaseDeathPenaltyBuffLevel();
 				}
 	}
 

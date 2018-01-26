@@ -235,6 +235,10 @@ public final class L2NpcTemplate extends L2CharTemplate
 		baseVitalityDivider = level > 0 && rewardExp > 0 ? baseHpMax * 9 * level * level /(100 * rewardExp) : 0;
 	}
 
+	public String getType() {
+		return type;
+	}
+
 	public void addTeachInfo(ClassId classId)
 	{
 		if (_teachInfo == null)
