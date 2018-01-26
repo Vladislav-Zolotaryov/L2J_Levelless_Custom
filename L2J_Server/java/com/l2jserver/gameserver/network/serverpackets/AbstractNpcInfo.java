@@ -3,18 +3,19 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.l2jserver.gameserver.network.serverpackets;
 
 import com.l2jserver.Config;
+import com.l2jserver.util.GradeUtil;
 import com.l2jserver.gameserver.datatables.ClanTable;
 import com.l2jserver.gameserver.instancemanager.CursedWeaponsManager;
 import com.l2jserver.gameserver.instancemanager.TownManager;
@@ -40,28 +41,28 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 {
 	//   ddddddddddddddddddffffdddcccccSSddd dddddc
 	//   ddddddddddddddddddffffdddcccccSSddd dddddccffd
-	
+
 	private static final String _S__22_NPCINFO = "[S] 0c NpcInfo";
 	protected int _x, _y, _z, _heading;
 	protected int _idTemplate;
 	protected boolean _isAttackable, _isSummoned;
 	protected int _mAtkSpd, _pAtkSpd;
-	
+
 	/**
 	 * Run speed, swimming run speed and flying run speed
 	 */
 	protected int _runSpd;
-	
+
 	/**
 	 * Walking speed, swimming walking speed and flying walking speed
 	 */
 	protected int _walkSpd;
-	
+
 	protected int _rhand, _lhand, _chest, _enchantEffect;
 	protected double _collisionHeight, _collisionRadius;
 	protected String _name = "";
 	protected String _title = "";
-	
+
 	public AbstractNpcInfo(L2Character cha)
 	{
 		_isSummoned = cha.isShowSummonAnimation();
@@ -74,7 +75,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 		_runSpd = cha.getTemplate().baseRunSpd;
 		_walkSpd = cha.getTemplate().baseWalkSpd;
 	}
-	
+
 	/* (non-Javadoc)
 	 * @see com.l2jserver.gameserver.serverpackets.ServerBasePacket#getType()
 	 */
@@ -83,7 +84,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 	{
 		return _S__22_NPCINFO;
 	}
-	
+
 	/**
 	 * Packet for Npcs
 	 */
@@ -94,7 +95,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 		private int _allyCrest = 0;
 		private int _allyId = 0;
 		private int _clanId = 0;
-		
+
 		public NpcInfo(L2Npc cha, L2Character attacker)
 		{
 			super(cha);
@@ -108,23 +109,28 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			_isAttackable = cha.isAutoAttackable(attacker);
 			if (cha.getTemplate().serverSideName)
 				_name = cha.getName();// On every subclass
-			
+
 			if (Config.L2JMOD_CHAMPION_ENABLE && cha.isChampion())
 				_title = (Config.L2JMOD_CHAMP_TITLE); // On every subclass
 			else if (cha.getTemplate().serverSideTitle)
 				_title = cha.getTemplate().title; // On every subclass
 			else
 				_title = cha.getTitle(); // On every subclass
-				
-			if (Config.SHOW_NPC_LVL && _npc instanceof L2MonsterInstance)
-			{
-				String t = "Lv " + cha.getLevel() + (cha.getAggroRange() > 0 ? "*" : "");
+
+			if (Config.SHOW_NPC_LEVEL_AS_GRADE && _npc instanceof L2MonsterInstance) {
+				String t = "Grade: " + GradeUtil.resolveGrade(cha.getOriginalLevel()) + (cha.getAggroRange() > 0 ? " [*]" : "");
 				if (_title != null)
 					t += " " + _title;
-				
+
+				_title = t;
+			}	else if (Config.SHOW_NPC_LVL && _npc instanceof L2MonsterInstance) {
+				String t = "Lv " + cha.getLevel() + (cha.getAggroRange() > 0 ? "[*]" : "");
+				if (_title != null)
+					t += " " + _title;
+
 				_title = t;
 			}
-			
+
 			// npc crest of owning clan/ally of castle
 			if (cha instanceof L2NpcInstance && cha.isInsideZone(L2Character.ZONE_TOWN) && (Config.SHOW_CREST_WITHOUT_QUEST || cha.getCastle().getShowNpcCrest()) && cha.getCastle().getOwnerId() != 0)
 			{
@@ -139,7 +145,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 				}
 			}
 		}
-		
+
 		@Override
 		protected void writeImpl()
 		{
@@ -179,7 +185,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(0x00); // Title color 0=client default
 			writeD(0x00); //pvp flag
 			writeD(0x00); // karma
-			
+
 			writeD(_npc.getAbnormalEffect()); // C2
 			writeD(_clanId); //clan id
 			writeD(_clanCrest); //crest id
@@ -187,7 +193,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(_allyCrest); // all crest
 			writeC(_npc.isFlying() ? 2 : 0); // C2
 			writeC(0x00); // title color 0=client
-			
+
 			writeF(_collisionRadius);
 			writeF(_collisionHeight);
 			writeD(_enchantEffect); // C4
@@ -199,11 +205,11 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(_npc.getSpecialEffect());
 		}
 	}
-	
+
 	public static class TrapInfo extends AbstractNpcInfo
 	{
 		private L2Trap _trap;
-		
+
 		public TrapInfo(L2Trap cha, L2Character attacker)
 		{
 			super(cha);
@@ -221,7 +227,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			_runSpd = _trap.getRunSpeed();
 			_walkSpd = _trap.getWalkSpeed();
 		}
-		
+
 		@Override
 		protected void writeImpl()
 		{
@@ -259,19 +265,19 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeS(_name);
 			writeS(_title);
 			writeD(0x00); // title color 0 = client default
-			
+
 			writeD(_trap.getPvpFlag());
 			writeD(_trap.getKarma());
-			
+
 			writeD(_trap.getAbnormalEffect()); // C2
 			writeD(0x00); //clan id
 			writeD(0x00); //crest id
 			writeD(0000); // C2
 			writeD(0000); // C2
 			writeC(0000); // C2
-			
-			writeC(0x00); // Title color 0=client default 
-			
+
+			writeC(0x00); // Title color 0=client default
+
 			writeF(_collisionRadius);
 			writeF(_collisionHeight);
 			writeD(0x00); // C4
@@ -283,36 +289,36 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(0x00);
 		}
 	}
-	
+
 	/**
 	 * Packet for Decoys
 	 */
 	public static class DecoyInfo extends AbstractNpcInfo
 	{
 		private L2Decoy _decoy;
-		
+
 		public DecoyInfo(L2Decoy cha)
 		{
 			super(cha);
-			
+
 			_idTemplate = cha.getTemplate().idTemplate;
 			_decoy = cha;
-			
+
 			_heading = cha.getOwner().getHeading();
 			// _mAtkSpd = cha.getMAtkSpd(); on abstract constructor
 			_pAtkSpd = cha.getOwner().getPAtkSpd();
 			_runSpd = cha.getOwner().getRunSpeed();
 			_walkSpd = cha.getOwner().getWalkSpeed();
-			
+
 			assert _idTemplate >= 13071 && _idTemplate <= 13076;
-			
+
 			if (_idTemplate < 13071 || _idTemplate > 13076)
 			{
 				throw new IllegalArgumentException("Using DecoyInfo packet with an unsupported decoy template: " + _idTemplate);
 			}
-			
+
 		}
-		
+
 		@Override
 		protected void writeImpl()
 		{
@@ -325,9 +331,9 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeS(_decoy.getOwner().getAppearance().getVisibleName());
 			writeD(_decoy.getOwner().getRace().ordinal());
 			writeD(_decoy.getOwner().getAppearance().getSex() ? 1 : 0);
-			
+
 			writeD(_decoy.getOwner().getClassIndex() == 0 ? _decoy.getOwner().getClassId().getId() : _decoy.getOwner().getBaseClass());
-			
+
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_HAIRALL));
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_HEAD));
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_RHAND));
@@ -340,7 +346,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_LRHAND));
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_HAIR));
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_HAIR2));
-			
+
 			// T1 new d's
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_RBRACELET));
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_LBRACELET));
@@ -351,10 +357,10 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_DECO5));
 			writeD(_decoy.getOwner().getInventory().getPaperdollItemId(Inventory.PAPERDOLL_DECO6));
 			// end of t1 new d's
-			
+
 			// CT2.3
 			writeD(0x00);
-			
+
 			// c6 new h's
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_UNDER));
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_HEAD));
@@ -368,7 +374,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_LRHAND));
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_HAIR));
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_HAIR2));
-			
+
 			// T1 new h's
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_RBRACELET));
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_LBRACELET));
@@ -378,22 +384,22 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_DECO4));
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_DECO5));
 			writeD(_decoy.getOwner().getInventory().getPaperdollAugmentationId(Inventory.PAPERDOLL_DECO6));
-			
+
 			// end of t1 new h's
 			// CT2.3
 			writeD(0x00);
 			writeD(0x00);
 			writeD(0x00);
-			
+
 			writeD(_decoy.getOwner().getPvpFlag());
 			writeD(_decoy.getOwner().getKarma());
-			
+
 			writeD(_mAtkSpd);
 			writeD(_pAtkSpd);
-			
+
 			writeD(_decoy.getOwner().getPvpFlag());
 			writeD(_decoy.getOwner().getKarma());
-			
+
 			writeD(_runSpd);
 			writeD(_walkSpd);
 			writeD(50); // swim run speed
@@ -421,13 +427,13 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 				writeF(_decoy.getOwner().getBaseTemplate().fCollisionRadius);
 				writeF(_decoy.getOwner().getBaseTemplate().fCollisionHeight);
 			}
-			
+
 			writeD(_decoy.getOwner().getAppearance().getHairStyle());
 			writeD(_decoy.getOwner().getAppearance().getHairColor());
 			writeD(_decoy.getOwner().getAppearance().getFace());
-			
+
 			writeS(_decoy.getOwner().getAppearance().getVisibleTitle());
-			
+
 			writeD(_decoy.getOwner().getClanId());
 			writeD(_decoy.getOwner().getClanCrestId());
 			writeD(_decoy.getOwner().getAllyId());
@@ -435,68 +441,68 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			// In UserInfo leader rights and siege flags, but here found nothing??
 			// Therefore RelationChanged packet with that info is required
 			writeD(0);
-			
+
 			writeC(_decoy.getOwner().isSitting() ? 0 : 1); // standing = 1  sitting = 0
 			writeC(_decoy.getOwner().isRunning() ? 1 : 0); // running = 1   walking = 0
 			writeC(_decoy.getOwner().isInCombat() ? 1 : 0);
 			writeC(_decoy.getOwner().isAlikeDead() ? 1 : 0);
-			
+
 			writeC(_decoy.getOwner().getAppearance().getInvisible() ? 1 : 0); // invisible = 1  visible =0
-			
+
 			writeC(_decoy.getOwner().getMountType()); // 1 on strider   2 on wyvern  3 on Great Wolf  0 no mount
 			writeC(_decoy.getOwner().getPrivateStoreType()); //  1 - sellshop
-			
+
 			writeH(_decoy.getOwner().getCubics().size());
 			for (int id : _decoy.getOwner().getCubics().keySet())
 				writeH(id);
-			
+
 			writeC(0x00); // find party members
-			
+
 			writeD(_decoy.getOwner().getAbnormalEffect());
-			
+
 			writeC(_decoy.getOwner().getRecomLeft()); //Changed by Thorgrim
 			writeH(_decoy.getOwner().getRecomHave()); //Blue value for name (0 = white, 255 = pure blue)
 			writeD(_decoy.getOwner().getClassId().getId());
-			
+
 			writeD(_decoy.getOwner().getMaxCp());
 			writeD((int) _decoy.getOwner().getCurrentCp());
 			writeC(_decoy.getOwner().isMounted() ? 0 : _decoy.getOwner().getEnchantEffect());
-			
+
 			if (_decoy.getOwner().getTeam() == 1)
 				writeC(0x01); //team circle around feet 1= Blue, 2 = red
 			else if (_decoy.getOwner().getTeam() == 2)
 				writeC(0x02); //team circle around feet 1= Blue, 2 = red
 			else
 				writeC(0x00); //team circle around feet 1= Blue, 2 = red
-			
+
 			writeD(_decoy.getOwner().getClanCrestLargeId());
 			writeC(_decoy.getOwner().isNoble() ? 1 : 0); // Symbol on char menu ctrl+I
 			writeC(_decoy.getOwner().isHero() ? 1 : 0); // Hero Aura
-			
+
 			writeC(_decoy.getOwner().isFishing() ? 1 : 0); //0x01: Fishing Mode (Cant be undone by setting back to 0)
 			writeD(_decoy.getOwner().getFishx());
 			writeD(_decoy.getOwner().getFishy());
 			writeD(_decoy.getOwner().getFishz());
-			
+
 			writeD(_decoy.getOwner().getAppearance().getNameColor());
-			
+
 			writeD(0x00); // isRunning() as in UserInfo?
-			
+
 			writeD(_decoy.getOwner().getPledgeClass());
 			writeD(0x00); // ??
-			
+
 			writeD(_decoy.getOwner().getAppearance().getTitleColor());
-			
+
 			//writeD(0x00); // ??
-			
+
 			writeD(_decoy.getOwner().isCursedWeaponEquipped() ? CursedWeaponsManager.getInstance().getLevel(_decoy.getOwner().getCursedWeaponEquippedId()) : 0x00);
-			// T1 
+			// T1
 			writeD(0x00);
-			
+
 			writeD(_decoy.getOwner().getTransformationId());
 		}
 	}
-	
+
 	/**
 	 * Packet for summons
 	 */
@@ -505,7 +511,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 		private L2Summon _summon;
 		private int _form = 0;
 		private int _val = 0;
-		
+
 		public SummonInfo(L2Summon cha, L2Character attacker, int val)
 		{
 			super(cha);
@@ -513,9 +519,9 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			_val = val;
 			if (_summon.isShowSummonAnimation())
 				_val = 2; //override for spawn
-			
+
 			int npcId = cha.getTemplate().npcId;
-			
+
 			if (npcId == 16041 || npcId == 16042)
 			{
 				if (cha.getLevel() > 84)
@@ -534,7 +540,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 				else if (cha.getLevel() > 59)
 					_form = 1;
 			}
-			
+
 			// fields not set on AbstractNpcInfo
 			_isAttackable = cha.isAutoAttackable(attacker);
 			_rhand = cha.getWeapon();
@@ -548,12 +554,12 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			_collisionHeight = cha.getTemplate().fCollisionHeight;
 			_collisionRadius = cha.getTemplate().fCollisionRadius;
 			_invisible = cha.getOwner() != null ? cha.getOwner().getAppearance().getInvisible() : false;
-			
+
 			// few fields needing fix from AbstractNpcInfo
 			_runSpd = cha.getPetSpeed();
 			_walkSpd = cha.isMountable() ? 45 : 30;
 		}
-		
+
 		@Override
 		protected void writeImpl()
 		{
@@ -564,7 +570,7 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 				if (tmp != null && tmp.isGM())
 					gmSeeInvis = true;
 			}
-			
+
 			writeC(0x0c);
 			writeD(_summon.getObjectId());
 			writeD(_idTemplate + 1000000); // npctype id
@@ -599,20 +605,20 @@ public abstract class AbstractNpcInfo extends L2GameServerPacket
 			writeS(_name);
 			writeS(_title);
 			writeD(0x01);// Title color 0=client default
-			
+
 			writeD(_summon.getPvpFlag());
 			writeD(_summon.getKarma());
-			
+
 			writeD(gmSeeInvis ? _summon.getAbnormalEffect() | AbnormalEffect.STEALTH.getMask() : _summon.getAbnormalEffect());
-			
+
 			writeD(0x00); //clan id
 			writeD(0x00); //crest id
 			writeD(0000); // C2
 			writeD(0000); // C2
 			writeC(0000); // C2
-			
-			writeC(_summon.getTeam());// Title color 0=client default  
-			
+
+			writeC(_summon.getTeam());// Title color 0=client default
+
 			writeF(_collisionRadius);
 			writeF(_collisionHeight);
 			writeD(_enchantEffect); // C4

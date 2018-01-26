@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -52,7 +52,7 @@ import javolution.util.FastMap;
 public final class L2NpcTemplate extends L2CharTemplate
 {
 	protected static final Logger _log = Logger.getLogger(Quest.class.getName());
-	
+
 	public final int npcId;
 	public final int idTemplate;
 	public final String type;
@@ -62,6 +62,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	public final boolean serverSideTitle;
 	public final String sex;
 	public final byte level;
+	public final byte originalLevel;
 	public final int rewardExp;
 	public final int rewardSp;
 	public final int aggroRange;
@@ -74,10 +75,10 @@ public final class L2NpcTemplate extends L2CharTemplate
 	public Race race;
 	public final String jClass;
 	public final boolean dropherb;
-	public boolean isQuestMonster; // doesn't include all mobs that are involved in 
+	public boolean isQuestMonster; // doesn't include all mobs that are involved in
 	// quests, just plain quest monsters for preventing champion spawn
 	public final float baseVitalityDivider;
-	
+
 	//Skill AI
 	public FastList<L2Skill> _buffskills;
 	public FastList<L2Skill> _negativeskills;
@@ -99,7 +100,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	public FastList<L2Skill> _Lrangeskills;
 	public FastList<L2Skill> _Srangeskills;
 	public FastList<L2Skill> _generalskills;
-	
+
 	private boolean _hasbuffskills;
 	private boolean _hasnegativeskills;
 	private boolean _hasdebuffskills;
@@ -120,16 +121,16 @@ public final class L2NpcTemplate extends L2CharTemplate
 	private boolean _hasLrangeskills;
 	private boolean _hasSrangeskills;
 	private boolean _hasgeneralskills;
-	
+
 	private L2NpcAIData _AIdataStatic = new L2NpcAIData();
-	
+
 	public static enum AbsorbCrystalType
 	{
 		LAST_HIT,
 		FULL_PARTY,
 		PARTY_ONE_RANDOM
 	}
-	
+
 	public static enum AIType
 	{
 		FIGHTER,
@@ -139,7 +140,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		HEALER,
 		CORPSE
 	}
-	
+
 	public static enum Race
 	{
 		UNDEAD,
@@ -169,26 +170,26 @@ public final class L2NpcTemplate extends L2CharTemplate
 		KAMAEL,
 		NONE
 	}
-	
+
 	//private final StatsSet _npcStatsSet;
-	
+
 	/** The table containing all Item that can be dropped by L2NpcInstance using this L2NpcTemplate*/
 	private FastList<L2DropCategory> _categories = null;
-	
+
 	/** The table containing all Minions that must be spawn with the L2NpcInstance using this L2NpcTemplate*/
 	private List<L2MinionData> _minions = null;
-	
+
 	private List<ClassId> _teachInfo;
 	private Map<Integer, L2Skill> _skills;
 	private Map<Stats, Double> _vulnerabilities;
 	// contains a list of quests for each event type (questStart, questAttack, questKill, etc)
 	private Map<Quest.QuestEventType, Quest[]> _questEvents;
-	
+
 	/**
 	 * Constructor of L2Character.<BR><BR>
-	 * 
+	 *
 	 * @param set The StatsSet object to transfer data to the method
-	 * 
+	 *
 	 */
 	public L2NpcTemplate(StatsSet set)
 	{
@@ -206,13 +207,14 @@ public final class L2NpcTemplate extends L2CharTemplate
 		serverSideTitle = set.getBool("serverSideTitle");
 		sex = set.getString("sex");
 		level = set.getByte("level");
+		originalLevel = set.getByte("originalLevel");
 		rewardExp = set.getInteger("rewardExp");
 		rewardSp = set.getInteger("rewardSp");
 		aggroRange = set.getInteger("aggroRange");
 		rhand = set.getInteger("rhand");
 		lhand = set.getInteger("lhand");
 		armor = set.getInteger("armor");
-		enchantEffect = set.getInteger("enchant"); 
+		enchantEffect = set.getInteger("enchant");
 		absorbLevel = set.getInteger("absorb_level", 0);
 		absorbType = AbsorbCrystalType.valueOf(set.getString("absorb_type"));
 		race = null;
@@ -232,34 +234,34 @@ public final class L2NpcTemplate extends L2CharTemplate
 		// can be loaded from db
 		baseVitalityDivider = level > 0 && rewardExp > 0 ? baseHpMax * 9 * level * level /(100 * rewardExp) : 0;
 	}
-	
+
 	public void addTeachInfo(ClassId classId)
 	{
 		if (_teachInfo == null)
 			_teachInfo = new FastList<ClassId>();
 		_teachInfo.add(classId);
 	}
-	
+
 	public ClassId[] getTeachInfo()
 	{
 		if (_teachInfo == null)
 			return null;
 		return _teachInfo.toArray(new ClassId[_teachInfo.size()]);
 	}
-	
+
 	public boolean canTeach(ClassId classId)
 	{
 		if (_teachInfo == null)
 			return false;
-		
+
 		// If the player is on a third class, fetch the class teacher
 		// information for its parent class.
 		if (classId.level() == 3)
 			return _teachInfo.contains(classId.getParent());
-		
+
 		return _teachInfo.contains(classId);
 	}
-	
+
 	// add a drop to a given category.  If the category does not exist, create it.
 	public void addDropData(L2DropData drop, int categoryType)
 	{
@@ -295,35 +297,35 @@ public final class L2NpcTemplate extends L2CharTemplate
 			}
 		}
 	}
-	
+
 	public void addRaidData(L2MinionData minion)
 	{
 		if (_minions == null)
 			_minions = new FastList<L2MinionData>();
 		_minions.add(minion);
 	}
-	
+
 	public void addVulnerability(Stats id, double vuln)
 	{
 		if (_vulnerabilities == null)
 			_vulnerabilities = new FastMap<Stats, Double>();
 		_vulnerabilities.put(id, new Double(vuln));
 	}
-	
+
 	public double getVulnerability(Stats id)
 	{
 		if (_vulnerabilities == null || _vulnerabilities.get(id) == null)
 			return 1;
 		return _vulnerabilities.get(id);
 	}
-	
-	
+
+
 	public void addSkill(L2Skill skill)
 	{
 
 		if (_skills == null)
 			_skills = new FastMap<Integer, L2Skill>();
-		
+
 		if(!skill.isPassive())
 		{
 			addGeneralSkill(skill);
@@ -400,19 +402,19 @@ public final class L2NpcTemplate extends L2CharTemplate
 				default :
 					addUniversalSkill(skill);
 					break;
-		
+
 			}
 		}
-		
+
 		_skills.put(skill.getId(), skill);
 	}
-	
-	
+
+
 	public double removeVulnerability(Stats id)
 	{
 		return _vulnerabilities.remove(id);
 	}
-	
+
 	/**
 	 * Return the list of all possible UNCATEGORIZED drops of this L2NpcTemplate.<BR><BR>
 	 */
@@ -420,7 +422,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _categories;
 	}
-	
+
 	/**
 	 * Return the list of all possible item drops of this L2NpcTemplate.<BR>
 	 * (ie full drops and part drops, mats, miscellaneous & UNCATEGORIZED)<BR><BR>
@@ -436,7 +438,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		}
 		return lst;
 	}
-	
+
 	/**
 	 * Empty all possible drops of this L2NpcTemplate.<BR><BR>
 	 */
@@ -451,7 +453,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		}
 		_categories.clear();
 	}
-	
+
 	/**
 	 * Return the list of all Minions that must be spawn with the L2NpcInstance using this L2NpcTemplate.<BR><BR>
 	 */
@@ -459,17 +461,17 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _minions;
 	}
-	
+
 	public Map<Integer, L2Skill> getSkills()
 	{
 		return _skills;
 	}
-	
+
 	public void addQuestEvent(Quest.QuestEventType EventType, Quest q)
 	{
 		if (_questEvents == null)
 			_questEvents = new FastMap<Quest.QuestEventType, Quest[]>();
-		
+
 		if (_questEvents.get(EventType) == null)
 		{
 			_questEvents.put(EventType, new Quest[]
@@ -481,7 +483,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		{
 			Quest[] _quests = _questEvents.get(EventType);
 			int len = _quests.length;
-			
+
 			// if only one registration per npc is allowed for this event type
 			// then only register this NPC if not already registered for the specified event.
 			// if a quest allows multiple registrations, then register regardless of count
@@ -504,9 +506,9 @@ public final class L2NpcTemplate extends L2CharTemplate
 			{
 				// be ready to add a new quest to a new copy of the list, with larger size than previously.
 				Quest[] tmp = new Quest[len + 1];
-				
-				// loop through the existing quests and copy them to the new list.  While doing so, also 
-				// check if this new quest happens to be just a replacement for a previously loaded quest.  
+
+				// loop through the existing quests and copy them to the new list.  While doing so, also
+				// check if this new quest happens to be just a replacement for a previously loaded quest.
 				// Replace existing if the new quest is the same (reload) or a child of the existing quest.
 				// Do nothing if the new quest is a superclass of an existing quest.
 				// Add the new quest in the end of the list otherwise.
@@ -528,13 +530,13 @@ public final class L2NpcTemplate extends L2CharTemplate
 			}
 		}
 	}
-	
+
 	/**
 	 * Checks if obj can be assigned to the Class represented by clazz.<br>
-	 * This is true if, and only if, obj is the same class represented by clazz, 
-	 * or a subclass of it or obj implements the interface represented by clazz. 
-	 * 
-	 * 
+	 * This is true if, and only if, obj is the same class represented by clazz,
+	 * or a subclass of it or obj implements the interface represented by clazz.
+	 *
+	 *
 	 * @param obj
 	 * @param clazz
 	 * @return
@@ -543,7 +545,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return L2NpcTemplate.isAssignableTo(obj.getClass(), clazz);
 	}
-	
+
 	public static boolean isAssignableTo(Class<?> sub, Class<?> clazz)
 	{
 		// if clazz represents an interface
@@ -567,15 +569,15 @@ public final class L2NpcTemplate extends L2CharTemplate
 				{
 					return true;
 				}
-				
+
 				sub = sub.getSuperclass();
 			}
 			while (sub != null);
 		}
-		
+
 		return false;
 	}
-	
+
 	public Quest[] getEventQuests(Quest.QuestEventType EventType)
 	{
 		if (_questEvents == null)
@@ -584,7 +586,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		}
 		return _questEvents.get(EventType);
 	}
-	
+
 	public void setRace(int raceId)
 	{
 		switch (raceId)
@@ -669,7 +671,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 				break;
 		}
 	}
-	
+
 	//-----------------------------------------------------------------------
 	// Npc AI Data
 	// By ShanSoft
@@ -684,7 +686,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _AIdataStatic;
 	}
-	
+
 	public void addBuffSkill(L2Skill skill)
 	{
 		if (_buffskills == null)
@@ -692,7 +694,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_buffskills.add(skill);
 		_hasbuffskills=true;
 	}
-	
+
 	public void addHealSkill(L2Skill skill)
 	{
 		if (_healskills == null)
@@ -700,7 +702,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_healskills.add(skill);
 		_hashealskills=true;
 	}
-	
+
 	public void addResSkill(L2Skill skill)
 	{
 		if (_resskills == null)
@@ -708,7 +710,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_resskills.add(skill);
 		_hasresskills=true;
 	}
-	
+
 	public void addAtkSkill(L2Skill skill)
 	{
 		if (_atkskills == null)
@@ -724,7 +726,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_debuffskills.add(skill);
 		_hasdebuffskills=true;
 	}
-	
+
 	public void addRootSkill(L2Skill skill)
 	{
 		if (_rootskills == null)
@@ -732,7 +734,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_rootskills.add(skill);
 		_hasrootskills=true;
 	}
-	
+
 	public void addSleepSkill(L2Skill skill)
 	{
 		if (_sleepskills == null)
@@ -740,7 +742,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_sleepskills.add(skill);
 		_hassleepskills=true;
 	}
-	
+
 	public void addStunSkill(L2Skill skill)
 	{
 		if (_stunskills == null)
@@ -748,7 +750,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_stunskills.add(skill);
 		_hasstunskills=true;
 	}
-	
+
 	public void addParalyzeSkill(L2Skill skill)
 	{
 		if (_paralyzeskills == null)
@@ -756,7 +758,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_paralyzeskills.add(skill);
 		_hasparalyzeskills=true;
 	}
-	
+
 	public void addFloatSkill(L2Skill skill)
 	{
 		if (_floatskills == null)
@@ -764,7 +766,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_floatskills.add(skill);
 		_hasfloatskills=true;
 	}
-	
+
 	public void addFossilSkill(L2Skill skill)
 	{
 		if (_fossilskills == null)
@@ -772,7 +774,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_fossilskills.add(skill);
 		_hasfossilskills=true;
 	}
-	
+
 	public void addNegativeSkill(L2Skill skill)
 	{
 		if (_negativeskills == null)
@@ -780,7 +782,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_negativeskills.add(skill);
 		_hasnegativeskills=true;
 	}
-	
+
 	public void addImmobiliseSkill(L2Skill skill)
 	{
 		if (_immobiliseskills == null)
@@ -788,7 +790,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_immobiliseskills.add(skill);
 		_hasimmobiliseskills=true;
 	}
-	
+
 	public void addDOTSkill(L2Skill skill)
 	{
 		if (_dotskills == null)
@@ -796,7 +798,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_dotskills.add(skill);
 		_hasdotskills=true;
 	}
-	
+
 	public void addUniversalSkill(L2Skill skill)
 	{
 		if (_universalskills == null)
@@ -804,7 +806,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_universalskills.add(skill);
 		_hasuniversalskills=true;
 	}
-	
+
 	public void addCOTSkill(L2Skill skill)
 	{
 		if (_cotskills == null)
@@ -812,7 +814,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_cotskills.add(skill);
 		_hascotskills=true;
 	}
-	
+
 	public void addManaHealSkill(L2Skill skill)
 	{
 		if (_manaskills == null)
@@ -827,7 +829,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 		_generalskills.add(skill);
 		_hasgeneralskills=true;
 	}
-	
+
 	public void addRangeSkill(L2Skill skill)
 	{
 		if (skill.getCastRange() <= 150 && skill.getCastRange() > 0)
@@ -845,7 +847,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 			_hasLrangeskills=true;
 		}
 	}
-	
+
 	//--------------------------------------------------------------------
 	public boolean hasBuffSkill()
 	{
@@ -855,12 +857,12 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _hashealskills;
 	}
-	
+
 	public boolean hasResSkill()
 	{
 		return _hasresskills;
 	}
-	
+
 	public boolean hasAtkSkill()
 	{
 		return _hasatkskills;
@@ -870,62 +872,62 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _hasdebuffskills;
 	}
-	
+
 	public boolean hasRootSkill()
 	{
 		return _hasrootskills;
 	}
-	
+
 	public boolean hasSleepSkill()
 	{
 		return _hassleepskills;
 	}
-	
+
 	public boolean hasStunSkill()
 	{
 		return _hasstunskills;
 	}
-	
+
 	public boolean hasParalyzeSkill()
 	{
 		return _hasparalyzeskills;
 	}
-	
+
 	public boolean hasFloatSkill()
 	{
 		return _hasfloatskills;
 	}
-	
+
 	public boolean hasFossilSkill()
 	{
 		return _hasfossilskills;
 	}
-	
+
 	public boolean hasNegativeSkill()
 	{
 		return _hasnegativeskills;
 	}
-	
+
 	public boolean hasImmobiliseSkill()
 	{
 		return _hasimmobiliseskills;
 	}
-	
+
 	public boolean hasDOTSkill()
 	{
 		return _hasdotskills;
 	}
-	
+
 	public boolean hasUniversalSkill()
 	{
 		return _hasuniversalskills;
 	}
-	
+
 	public boolean hasCOTSkill()
 	{
 		return _hascotskills;
 	}
-	
+
 	public boolean hasManaHealSkill()
 	{
 		return _hasmanaskills;
@@ -942,20 +944,20 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return _hasgeneralskills;
 	}
-	
+
 	public L2NpcTemplate.Race getRace()
 	{
 		if (race == null)
 			race = L2NpcTemplate.Race.NONE;
-		
+
 		return race;
 	}
-	
+
 	public boolean isCustom()
 	{
 		return npcId != idTemplate;
 	}
-	
+
 	/**
 	 * @return name
 	 */
@@ -963,7 +965,7 @@ public final class L2NpcTemplate extends L2CharTemplate
 	{
 		return name;
 	}
-	
+
 	public boolean isSpecialTree()
 	{
 		return npcId == L2XmassTreeInstance.SPECIAL_TREE_ID;

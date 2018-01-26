@@ -714,6 +714,7 @@ public final class Config
 	public static int INVENTORY_MAXIMUM_PET;
 	public static double PET_HP_REGEN_MULTIPLIER;
 	public static double PET_MP_REGEN_MULTIPLIER;
+	public static boolean SHOW_NPC_LEVEL_AS_GRADE;
 
 
 	//--------------------------------------------------
@@ -891,7 +892,7 @@ public final class Config
 	public static int PVP_PVP_TIME;
 	public static boolean ALT_PLAYER_DROP_CAN_BE_CRYSTALIZED;
 	public static float ALT_PLAYER_DROP_CRYSTALIZATION_CHANCE;
-	
+
 	public static enum IdFactoryType
 	{
 		Compaction,
@@ -1872,6 +1873,7 @@ public final class Config
 					DEEPBLUE_DROP_RULES = Boolean.parseBoolean(NPC.getProperty("UseDeepBlueDropRules", "True"));
 					DEEPBLUE_DROP_RULES_RAID = Boolean.parseBoolean(NPC.getProperty("UseDeepBlueDropRulesRaid", "True"));
 					SHOW_NPC_LVL = Boolean.parseBoolean(NPC.getProperty("ShowNpcLevel", "False"));
+					SHOW_NPC_LEVEL_AS_GRADE = Boolean.parseBoolean(NPC.getProperty("ShowNpcLevelAsGrade", "False"));
 					SHOW_CREST_WITHOUT_QUEST = Boolean.parseBoolean(NPC.getProperty("ShowCrestWithoutQuest", "False"));
 					ENABLE_RANDOM_ENCHANT_EFFECT = Boolean.parseBoolean(NPC.getProperty("EnableRandomEnchantEffect", "False"));
 					MIN_NPC_LVL_DMG_PENALTY = Integer.parseInt(NPC.getProperty("MinNPCLevelForDmgPenalty", "78"));
