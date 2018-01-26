@@ -784,6 +784,10 @@ public final class Config
 	public static float RATE_DROP_SPOIL_MIN_MAX_MULTIPLE;
 	public static TIntFloatHashMap RATE_DROP_ITEMS_BY_ID_MIN_MAX_MULTIPLIER;
 
+	public static boolean VALUABLE_ITEMS_DETAILED_CALCULATION;
+	public static boolean VALUABLE_ITEMS_LIMIT_LOG;
+	public static int VALUABLE_ITEMS_WARNING_LIMIT;
+
 	//--------------------------------------------------
 	// Seven Signs Settings
 	//--------------------------------------------------
@@ -1971,6 +1975,10 @@ public final class Config
 					RATE_DROP_ITEMS_MIN_MAX_MULTIPLIER = Float.parseFloat(ratesSettings.getProperty("RateDropItemsMinMaxMultiplier", "1."));
 					RATE_RAID_DROP_ITEMS_MIN_MAX_MULTIPLIER = Float.parseFloat(ratesSettings.getProperty("RateRaidDropItemsMinMaxMultiplier", "1."));
 					RATE_DROP_SPOIL_MIN_MAX_MULTIPLE = Float.parseFloat(ratesSettings.getProperty("RateDropSpoilMinMaxMultiplier", "1."));
+
+					VALUABLE_ITEMS_DETAILED_CALCULATION = Boolean.parseBoolean(ratesSettings.getProperty("ValuableItemsDetailedCalculation", "False"));
+					VALUABLE_ITEMS_LIMIT_LOG = Boolean.parseBoolean(ratesSettings.getProperty("ValuableItemsLimitLog", "False"));
+					VALUABLE_ITEMS_WARNING_LIMIT = Integer.parseInt(ratesSettings.getProperty("ValuableItemsWarningLimit", "50"));
 
 					try {
 						String[] rateDropItemsByIdMinMaxMultiplier = ratesSettings.getProperty("RateDropItemsByIdMinMaxMultiplier", "").split(";");

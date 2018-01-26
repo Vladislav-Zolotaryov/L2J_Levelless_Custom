@@ -63,6 +63,7 @@ import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.skills.Stats;
 import com.l2jserver.gameserver.templates.chars.L2NpcTemplate;
 import com.l2jserver.gameserver.templates.item.L2EtcItemType;
+import com.l2jserver.gameserver.templates.item.L2Item;
 import com.l2jserver.gameserver.util.Util;
 import com.l2jserver.util.Rnd;
 
@@ -1287,7 +1288,7 @@ public class L2Attackable extends L2Npc
 		// Get default drop chance for the category (that's the sum of chances for all items in the category)
 		// keep track of the base category chance as it'll be used later, if an item is drop from the category.
 		// for everything else, use the total "categoryDropChance"
-		int basecategoryDropChance = categoryDrops.getCategoryChance() ;
+		int basecategoryDropChance = categoryDrops.getCategoryChance();
 		int categoryDropChance = basecategoryDropChance;
 
 		int deepBlueDrop = 1;
@@ -1380,21 +1381,48 @@ public class L2Attackable extends L2Npc
 				dropChance = dropChance % L2DropData.MAX_CHANCE;
 			}
 
-			// Check if the Item must be dropped
-			int random = Rnd.get(L2DropData.MAX_CHANCE);
-			while (random < dropChance)
-			{
-				// Get the item quantity dropped
-				if (min < max)
-					itemCount += Rnd.get(min, max);
-				else if (min == max)
-					itemCount += min;
-				else
-					itemCount++;
+			L2Item dropItemTemplate = ItemTable.getInstance().getTemplate(drop.getItemId());
 
-				// Prepare for next iteration if dropChance > L2DropData.MAX_CHANCE
-				dropChance -= L2DropData.MAX_CHANCE;
+			// Calculate drop chance per item, if it is a valueable weapon, shield, armor or accessory
+			if (Config.VALUABLE_ITEMS_DETAILED_CALCULATION && (dropItemTemplate.getType2() == L2Item.TYPE2_WEAPON ||
+					dropItemTemplate.getType2() == L2Item.TYPE2_SHIELD_ARMOR ||
+			 		dropItemTemplate.getType2() == L2Item.TYPE2_ACCESSORY)) {
+
+					int iterations = 0;
+					if (min == max || min > max) {
+						iterations = min;
+					} else {
+						iterations = Rnd.get(min, max);
+					}
+
+					if (Config.VALUABLE_ITEMS_LIMIT_LOG && iterations > Config.VALUABLE_ITEMS_WARNING_LIMIT) {
+						_log.warning("Warning, valuable iterations calculation for large number of items " + iterations + " caused by " + lastAttacker);
+					}
+
+					for(int i=0; i < iterations; i++){
+						int random = Rnd.get(L2DropData.MAX_CHANCE);
+						if (random < dropChance) {
+							itemCount++;
+						}
+					}
+			} else {
+				// Check if the Item must be dropped
+				int random = Rnd.get(L2DropData.MAX_CHANCE);
+				while (random < dropChance)
+				{
+					// Get the item quantity dropped
+					if (min < max)
+						itemCount += Rnd.get(min, max);
+					else if (min == max)
+						itemCount += min;
+					else
+						itemCount++;
+
+					// Prepare for next iteration if dropChance > L2DropData.MAX_CHANCE
+					dropChance -= L2DropData.MAX_CHANCE;
+				}
 			}
+
 			if (Config.L2JMOD_CHAMPION_ENABLE)
 				// TODO (April 11, 2009): Find a way not to hardcode these values.
 				if ((drop.getItemId() == 57 || (drop.getItemId() >= 6360 && drop.getItemId() <= 6362)) && isChampion())
@@ -1443,6 +1471,26 @@ public class L2Attackable extends L2Npc
 		doItemDrop(getTemplate(),lastAttacker);
 	}
 
+	public void handleSpoil(L2DropCategory cat, L2PcInstance player, int levelModifier) {
+		if (isSpoil())
+		{
+			FastList<RewardItem> sweepList = new FastList<RewardItem>();
+
+			for(L2DropData drop: cat.getAllDrops() )
+			{
+				RewardItem item = calculateRewardItem(player, drop, levelModifier, true);
+				if (item == null)
+					continue;
+
+				if (Config.DEBUG)
+					_log.fine("Item id to spoil: " + item.getItemId() + " amount: " + item.getCount());
+				sweepList.add(item);
+			}
+			if (!sweepList.isEmpty())
+				_sweepItems = sweepList.toArray(new RewardItem[sweepList.size()]);
+		}
+	}
+
 	/**
 	 * Manage Base, Quests and Special Events drops of L2Attackable (called by calculateRewards).
 	 *
@@ -1479,46 +1527,24 @@ public class L2Attackable extends L2Npc
 		CursedWeaponsManager.getInstance().checkDrop(this, player);
 
 		// now throw all categorized drops and handle spoil.
-		if (npcTemplate.getDropData()!=null)
+		if (npcTemplate.getDropData() != null)
 		{
 			for(L2DropCategory cat:npcTemplate.getDropData())
 			{
 				RewardItem item = null;
-				if (cat.isSweep())
-				{
-					// according to sh1ny, seeded mobs CAN be spoiled and swept.
-					if ( isSpoil()/* && !isSeeded() */)
-					{
-						FastList<RewardItem> sweepList = new FastList<RewardItem>();
-
-						for(L2DropData drop: cat.getAllDrops() )
-						{
-							item = calculateRewardItem(player, drop, levelModifier, true);
-							if (item == null)
-								continue;
-
-							if (Config.DEBUG)
-								_log.fine("Item id to spoil: " + item.getItemId() + " amount: " + item.getCount());
-							sweepList.add(item);
-						}
-						// Set the table _sweepItems of this L2Attackable
-						if (!sweepList.isEmpty())
-							_sweepItems = sweepList.toArray(new RewardItem[sweepList.size()]);
-					}
+				if (cat.isSweep()) {
+					handleSpoil(cat, player, levelModifier);
 				}
-				else
-				{
-					if (isSeeded())
-					{
-						L2DropData drop = cat.dropSeedAllowedDropsOnly();
+				else if (isSeeded()) {
+					L2DropData drop = cat.dropSeedAllowedDropsOnly();
 
-						if (drop == null)
-							continue;
+					if (drop == null)
+						continue;
 
-						item = calculateRewardItem(player, drop, levelModifier, false);
-					}
-					else
-						item = calculateCategorizedRewardItem(player, cat, levelModifier);
+					item = calculateRewardItem(player, drop, levelModifier, false);
+				} else {
+					item = calculateCategorizedRewardItem(player, cat, levelModifier);
+				}
 
 					if (item != null)
 					{
@@ -1546,7 +1572,7 @@ public class L2Attackable extends L2Npc
 					}
 				}
 			}
-		}
+
 		// Apply Special Item drop with random(rnd) quantity(qty) for champions.
 		if (Config.L2JMOD_CHAMPION_ENABLE && isChampion() && (Config.L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE > 0 || Config.L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE > 0))
 		{
