@@ -730,6 +730,10 @@ public final class Config
 	public static double MONSTER_PATTACK_MULTIPLIER;
 	public static double MONSTER_MATTACK_MULTIPLIER;
 
+	public static String HIGH_CHANCE_DROP_INFO_COLOR;
+	public static String MEDIUM_CHANCE_DROP_INFO_COLOR;
+	public static String LOW_CHANCE_DROP_INFO_COLOR;
+
 	//--------------------------------------------------
 	// PvP Settings
 	//--------------------------------------------------
@@ -1936,6 +1940,10 @@ public final class Config
 					MONSTER_MDEFENCE_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterMDefenceMultiplier", "100")) /100;
 					MONSTER_PATTACK_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterPAttackMultiplier", "100")) /100;
 					MONSTER_MATTACK_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterMAttackMultiplier", "100")) /100;
+
+					HIGH_CHANCE_DROP_INFO_COLOR = NPC.getProperty("HighChanceDropInfoColor", "b32d00");
+					MEDIUM_CHANCE_DROP_INFO_COLOR = NPC.getProperty("MediumChanceDropInfoColor", "009933");
+					LOW_CHANCE_DROP_INFO_COLOR = NPC.getProperty("LowChanceDropInfoColor", "999999");
 				}
 				catch (Exception e)
 				{

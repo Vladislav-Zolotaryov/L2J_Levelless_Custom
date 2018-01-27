@@ -3,12 +3,12 @@
  * the terms of the GNU General Public License as published by the Free Software
  * Foundation, either version 3 of the License, or (at your option) any later
  * version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
  * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
  * details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,16 +37,16 @@ public class L2NpcActionShift implements IActionHandler
 {
 	/**
 	 * Manage and Display the GM console to modify the L2NpcInstance (GM only).<BR><BR>
-	 * 
+	 *
 	 * <B><U> Actions (If the L2PcInstance is a GM only)</U> :</B><BR><BR>
 	 * <li>Set the L2NpcInstance as target of the L2PcInstance player (if necessary)</li>
 	 * <li>Send a Server->Client packet MyTargetSelected to the L2PcInstance player (display the select window)</li>
 	 * <li>If L2NpcInstance is autoAttackable, send a Server->Client packet StatusUpdate to the L2PcInstance in order to update L2NpcInstance HP bar </li>
 	 * <li>Send a Server->Client NpcHtmlMessage() containing the GM console about this L2NpcInstance </li><BR><BR>
-	 * 
+	 *
 	 * <FONT COLOR=#FF0000><B> <U>Caution</U> : Each group of Server->Client packet must be terminated by a ActionFailed packet in order to avoid
 	 * that client wait an other packet</B></FONT><BR><BR>
-	 * 
+	 *
 	 * <B><U> Example of use </U> :</B><BR><BR>
 	 * <li> Client packet : Action</li><BR><BR>
 	 */
@@ -75,7 +75,7 @@ public class L2NpcActionShift implements IActionHandler
 
 			NpcHtmlMessage html = new NpcHtmlMessage(0);
 			html.setFile(activeChar.getHtmlPrefix(), "data/html/admin/npcinfo.htm");
-			
+
 			html.replace("%objid%", String.valueOf(target.getObjectId()));
 			html.replace("%class%", target.getClass().getSimpleName());
 			html.replace("%id%",    String.valueOf(((L2Npc)target).getTemplate().npcId));
@@ -87,7 +87,7 @@ public class L2NpcActionShift implements IActionHandler
 			html.replace("%hpmax%", String.valueOf(((L2Character)target).getMaxHp()));
 			html.replace("%mp%",    String.valueOf((int)((L2Character)target).getCurrentMp()));
 			html.replace("%mpmax%", String.valueOf(((L2Character)target).getMaxMp()));
-			
+
 			html.replace("%patk%", String.valueOf(((L2Character)target).getPAtk(null)));
 			html.replace("%matk%", String.valueOf(((L2Character)target).getMAtk(null, null)));
 			html.replace("%pdef%", String.valueOf(((L2Character)target).getPDef(null)));
@@ -97,7 +97,7 @@ public class L2NpcActionShift implements IActionHandler
 			html.replace("%crit%", String.valueOf(((L2Character)target).getCriticalHit(null, null)));
 			html.replace("%rspd%", String.valueOf(((L2Character)target).getRunSpeed()));
 			html.replace("%aspd%", String.valueOf(((L2Character)target).getPAtkSpd()));
-			html.replace("%cspd%", String.valueOf(((L2Character)target).getMAtkSpd()));			
+			html.replace("%cspd%", String.valueOf(((L2Character)target).getMAtkSpd()));
 			html.replace("%str%",  String.valueOf(((L2Character)target).getSTR()));
 			html.replace("%dex%",  String.valueOf(((L2Character)target).getDEX()));
 			html.replace("%con%",  String.valueOf(((L2Character)target).getCON()));
@@ -105,7 +105,7 @@ public class L2NpcActionShift implements IActionHandler
 			html.replace("%wit%",  String.valueOf(((L2Character)target).getWIT()));
 			html.replace("%men%",  String.valueOf(((L2Character)target).getMEN()));
 			html.replace("%loc%",  String.valueOf(target.getX()+" "+target.getY()+" "+target.getZ()));
-			
+
 			if (((L2Npc)target).getSpawn() != null)
 			{
 				html.replace("%spawn%", ((L2Npc)target).getSpawn().getLocx()+" "+((L2Npc)target).getSpawn().getLocy()+" "+((L2Npc)target).getSpawn().getLocz());
@@ -120,7 +120,7 @@ public class L2NpcActionShift implements IActionHandler
 				html.replace("%loc3d%", "<font color=FF0000>--</font>");
 				html.replace("%resp%",  "<font color=FF0000>--</font>");
 			}
-			
+
 			if (((L2Character)target).hasAI())
 			{
 				html.replace("%ai%",   "<tr><td><table width=270 border=0><tr><td width=100><font color=FFAA00>AI</font></td><td align=right width=170>"+((L2Character)target).getAI().getClass().getSimpleName()+"</td></tr></table></td></tr>");
@@ -131,7 +131,7 @@ public class L2NpcActionShift implements IActionHandler
 				html.replace("%ai%",   "");
 				html.replace("%aint%", "");
 			}
-			
+
 			if (target instanceof L2MerchantInstance)
 			{
 				html.replace("%butt%","<button value=\"Shop\" action=\"bypass -h admin_showShop "+String.valueOf(((L2Npc)target).getTemplate().npcId)+"\" width=60 height=21 back=\"L2UI_ct1.button_df\" fore=\"L2UI_ct1.button_df\">");
@@ -140,8 +140,8 @@ public class L2NpcActionShift implements IActionHandler
 			{
 				html.replace("%butt%","");
 			}
-			
-			activeChar.sendPacket(html);			
+
+			activeChar.sendPacket(html);
 		}
 		else if (Config.ALT_GAME_VIEWNPC)
 		{
@@ -228,7 +228,7 @@ public class L2NpcActionShift implements IActionHandler
 			{
 				StringUtil.append(html1,
 						"<br><center><font color=\"LEVEL\">[Drop Info]</font></center>" +
-						"<br>Rates legend: <font color=\"ff0000\">50%+</font> <font color=\"00ff00\">30%+</font> <font color=\"0000ff\">less than 30%</font>" +
+						"<br>Rates legend: <font color=\""+Config.HIGH_CHANCE_DROP_INFO_COLOR+"\">50%+</font> <font color=\""+Config.MEDIUM_CHANCE_DROP_INFO_COLOR+"\">30%+</font> <font color=\""+Config.LOW_CHANCE_DROP_INFO_COLOR+"\">less than 30%</font>" +
 						"<table border=0 width=\"100%\">"
 						);
 				for (L2DropCategory cat : ((L2Npc)target).getTemplate().getDropData())
@@ -241,12 +241,13 @@ public class L2NpcActionShift implements IActionHandler
 
 						final String color;
 
-						if (drop.getChance() >= 500000)
-							color = "ff0000";
-						else if (drop.getChance() >= 300000)
-							color = "00ff00";
+						double chance = drop.getChance() * Config.RATE_DROP_ITEMS;
+						if (chance >= 500000)
+							color = Config.HIGH_CHANCE_DROP_INFO_COLOR;
+						else if (chance >= 300000)
+							color = Config.MEDIUM_CHANCE_DROP_INFO_COLOR;
 						else
-							color = "0000ff";
+							color = Config.LOW_CHANCE_DROP_INFO_COLOR;
 
 						StringUtil.append(html1,
 								"<tr><td><font color=\"",
