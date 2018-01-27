@@ -1003,8 +1003,6 @@ public final class Formulas
 		if (Config.L2JMOD_CHAMPION_ENABLE && cha.isChampion())
 			hpRegenMultiplier *= Config.L2JMOD_CHAMPION_HP_REGEN;
 
-		System.out.println("HP regen for character " + cha + " is hpRegenMultiplier " + hpRegenMultiplier);
-
 		if (cha instanceof L2PcInstance)
 		{
 			L2PcInstance player = (L2PcInstance) cha;
@@ -1102,8 +1100,6 @@ public final class Formulas
 		double init = cha.getTemplate().baseMpReg;
 		double mpRegenMultiplier = calculateMultipliers(cha, Config.MP_REGEN_MULTIPLIER, Config.RAID_MP_REGEN_MULTIPLIER, Config.MONSTER_MP_REGEN_MULTIPLIER, Config.GUARD_MP_REGEN_MULTIPLIER);
 		double mpRegenBonus = 0;
-
-		System.out.println("MP regen for character " + cha + " is mpRegenMultiplier " + mpRegenMultiplier);
 
 		if (cha instanceof L2PcInstance)
 		{
