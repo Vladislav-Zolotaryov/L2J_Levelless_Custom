@@ -309,7 +309,9 @@ public class CharStat
     	if (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
     		bonusAtk = Config.L2JMOD_CHAMPION_ATK;
 
-			bonusAtk = Formulas.calculateMultipliers(target, bonusAtk, Config.RAID_MATTACK_MULTIPLIER, Config.MONSTER_MATTACK_MULTIPLIER, Config.GUARD_MATTACK_MULTIPLIER);
+			bonusAtk = Formulas.calculateMultipliers(_activeChar, bonusAtk, Config.RAID_MATTACK_MULTIPLIER, Config.MONSTER_MATTACK_MULTIPLIER, Config.GUARD_MATTACK_MULTIPLIER);
+
+			System.out.println("M.Attack bonus for character " + _activeChar + " is " + bonusAtk + " after bonus applied "  + _activeChar.getTemplate().baseMAtk * bonusAtk);
 
     	double attack = _activeChar.getTemplate().baseMAtk * bonusAtk;
 		// Get the skill type to calculate its effect in function of base stats
@@ -405,8 +407,8 @@ public class CharStat
     	return 1;
 
 		// Get the base MAtk of the L2Character
-		double defence = Formulas.calculateMultipliers(target, _activeChar.getTemplate().baseMDef, Config.RAID_MDEFENCE_MULTIPLIER, Config.MONSTER_MDEFENCE_MULTIPLIER, Config.GUARD_MDEFENCE_MULTIPLIER);
-
+		double defence = Formulas.calculateMultipliers(_activeChar, _activeChar.getTemplate().baseMDef, Config.RAID_MDEFENCE_MULTIPLIER, Config.MONSTER_MDEFENCE_MULTIPLIER, Config.GUARD_MDEFENCE_MULTIPLIER);
+		System.out.println("M.Def for character " + _activeChar + " is " + defence + " base value is " +  _activeChar.getTemplate().baseMDef);
 		// Calculate modifiers Magic Attack
 		return (int) calcStat(Stats.MAGIC_DEFENCE, defence, target, skill);
 	}
@@ -469,7 +471,8 @@ public class CharStat
 		if  (Config.L2JMOD_CHAMPION_ENABLE && _activeChar.isChampion())
 			bonusAtk = Config.L2JMOD_CHAMPION_ATK;
 
-		bonusAtk = Formulas.calculateMultipliers(target, bonusAtk, Config.RAID_PATTACK_MULTIPLIER, Config.MONSTER_PATTACK_MULTIPLIER, Config.GUARD_PATTACK_MULTIPLIER);
+		bonusAtk = Formulas.calculateMultipliers(_activeChar, bonusAtk, Config.RAID_PATTACK_MULTIPLIER, Config.MONSTER_PATTACK_MULTIPLIER, Config.GUARD_PATTACK_MULTIPLIER);
+		System.out.println("P.Attack bonus for character " + _activeChar + " is " + bonusAtk + " after bonus applied "  + _activeChar.getTemplate().basePAtk * bonusAtk);
 		return (int) calcStat(Stats.POWER_ATTACK, _activeChar.getTemplate().basePAtk * bonusAtk, target, null);
 	}
 
@@ -571,7 +574,8 @@ public class CharStat
     	if (_activeChar == null)
     		return 1;
 
-			double pdef = Formulas.calculateMultipliers(target, _activeChar.getTemplate().basePDef, Config.RAID_PDEFENCE_MULTIPLIER, Config.MONSTER_PDEFENCE_MULTIPLIER, Config.GUARD_PDEFENCE_MULTIPLIER);
+			double pdef = Formulas.calculateMultipliers(_activeChar, _activeChar.getTemplate().basePDef, Config.RAID_PDEFENCE_MULTIPLIER, Config.MONSTER_PDEFENCE_MULTIPLIER, Config.GUARD_PDEFENCE_MULTIPLIER);
+			System.out.println("P.Def for character " + _activeChar + " is " + pdef + " base value is " +  _activeChar.getTemplate().basePDef);
 			return (int) calcStat(Stats.POWER_DEFENCE, pdef, target, null);
 	}
 

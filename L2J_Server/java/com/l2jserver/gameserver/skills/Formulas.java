@@ -971,7 +971,11 @@ public final class Formulas
 
 		public static double calculateMultipliers(L2Character cha, double baseValue, double raidMultiplier, double monsterMultiplier, double guardMultiplier) {
 			double value = 0;
-			if (cha instanceof L2MonsterInstance && !cha.isRaid()) {
+			if (cha == null) {
+				return baseValue;
+			}
+
+			if (L2MonsterInstance.class.isAssignableFrom(cha.getClass()) && !cha.isRaid()) {
 				L2MonsterInstance npcInstance = (L2MonsterInstance) cha;
 				if (npcInstance.getTemplate().getType().equals("L2Guard")) {
 					value = baseValue * guardMultiplier;
@@ -1098,6 +1102,8 @@ public final class Formulas
 		double init = cha.getTemplate().baseMpReg;
 		double mpRegenMultiplier = calculateMultipliers(cha, Config.MP_REGEN_MULTIPLIER, Config.RAID_MP_REGEN_MULTIPLIER, Config.MONSTER_MP_REGEN_MULTIPLIER, Config.GUARD_MP_REGEN_MULTIPLIER);
 		double mpRegenBonus = 0;
+
+		System.out.println("MP regen for character " + cha + " is mpRegenMultiplier " + mpRegenMultiplier);
 
 		if (cha instanceof L2PcInstance)
 		{
