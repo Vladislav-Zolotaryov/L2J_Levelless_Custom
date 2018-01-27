@@ -25,6 +25,8 @@ import com.l2jserver.gameserver.skills.Stats;
 import com.l2jserver.gameserver.templates.item.L2Weapon;
 import com.l2jserver.gameserver.templates.item.L2WeaponType;
 import com.l2jserver.gameserver.skills.Formulas;
+import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
+import com.l2jserver.gameserver.model.actor.instance.L2GuardInstance;
 
 public class CharStat
 {
@@ -266,7 +268,7 @@ public class CharStat
     	if (_activeChar == null)
     		return 1;
 
-		return (int) calcStat(Stats.LIMIT_HP, getMaxVisibleHp(), null, null);
+			return (int) calcStat(Stats.LIMIT_HP, getMaxVisibleHp(), null, null);
 	}
 
 	public int getMaxVisibleHp()
@@ -274,7 +276,13 @@ public class CharStat
     	if (_activeChar == null)
     		return 1;
 
-		return (int) calcStat(Stats.MAX_HP, _activeChar.getTemplate().baseHpMax, null, null);
+			double maxHp =  _activeChar.getTemplate().baseHpMax;
+			if (L2MonsterInstance.class.isAssignableFrom(_activeChar.getClass()) && !_activeChar.isRaid()) {
+				maxHp *= Config.MONSTER_HP_MULTIPLIER;
+			} else if (L2GuardInstance.class.isAssignableFrom(_activeChar.getClass())) {
+				maxHp *= Config.GUARD_HP_MULTIPLIER;
+			}
+		  return (int) calcStat(Stats.MAX_HP, maxHp, null, null);
 	}
 
 	public int getMaxMp()
@@ -282,7 +290,13 @@ public class CharStat
     	if (_activeChar == null)
     		return 1;
 
-		return (int) calcStat(Stats.MAX_MP, _activeChar.getTemplate().baseMpMax, null, null);
+			double maxMp = _activeChar.getTemplate().baseMpMax;
+			if (L2MonsterInstance.class.isAssignableFrom(_activeChar.getClass()) && !_activeChar.isRaid()) {
+				maxMp *= Config.MONSTER_MP_MULTIPLIER;
+			} else if (L2GuardInstance.class.isAssignableFrom(_activeChar.getClass())) {
+				maxMp *= Config.GUARD_MP_MULTIPLIER;
+			}
+		  return (int) calcStat(Stats.MAX_MP, maxMp, null, null);
 	}
 
 	/**

@@ -718,6 +718,8 @@ public final class Config
 
 	public static double GUARD_HP_REGEN_MULTIPLIER;
 	public static double GUARD_MP_REGEN_MULTIPLIER;
+	public static double GUARD_HP_MULTIPLIER;
+	public static double GUARD_MP_MULTIPLIER;
 	public static double GUARD_PDEFENCE_MULTIPLIER;
 	public static double GUARD_MDEFENCE_MULTIPLIER;
 	public static double GUARD_PATTACK_MULTIPLIER;
@@ -725,6 +727,8 @@ public final class Config
 
 	public static double MONSTER_HP_REGEN_MULTIPLIER;
 	public static double MONSTER_MP_REGEN_MULTIPLIER;
+	public static double MONSTER_HP_MULTIPLIER;
+	public static double MONSTER_MP_MULTIPLIER;
 	public static double MONSTER_PDEFENCE_MULTIPLIER;
 	public static double MONSTER_MDEFENCE_MULTIPLIER;
 	public static double MONSTER_PATTACK_MULTIPLIER;
@@ -1929,6 +1933,8 @@ public final class Config
 
 					GUARD_HP_REGEN_MULTIPLIER = Double.parseDouble(NPC.getProperty("GuardHpRegenMultiplier", "100")) /100;
 					GUARD_MP_REGEN_MULTIPLIER = Double.parseDouble(NPC.getProperty("GuardMpRegenMultiplier", "100")) /100;
+					GUARD_HP_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterHpMultiplier", "100")) /100;
+					GUARD_MP_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterMpMultiplier", "100")) /100;
 					GUARD_PDEFENCE_MULTIPLIER = Double.parseDouble(NPC.getProperty("GuardPDefenceMultiplier", "100")) /100;
 					GUARD_MDEFENCE_MULTIPLIER = Double.parseDouble(NPC.getProperty("GuardMDefenceMultiplier", "100")) /100;
 					GUARD_PATTACK_MULTIPLIER = Double.parseDouble(NPC.getProperty("GuardPAttackMultiplier", "100")) /100;
@@ -1936,6 +1942,8 @@ public final class Config
 
 					MONSTER_HP_REGEN_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterHpRegenMultiplier", "100")) /100;
 					MONSTER_MP_REGEN_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterMpRegenMultiplier", "100")) /100;
+					MONSTER_HP_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterHpMultiplier", "100")) /100;
+					MONSTER_MP_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterMpMultiplier", "100")) /100;
 					MONSTER_PDEFENCE_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterPDefenceMultiplier", "100")) /100;
 					MONSTER_MDEFENCE_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterMDefenceMultiplier", "100")) /100;
 					MONSTER_PATTACK_MULTIPLIER = Double.parseDouble(NPC.getProperty("MonsterPAttackMultiplier", "100")) /100;

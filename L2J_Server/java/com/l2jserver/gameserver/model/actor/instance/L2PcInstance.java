@@ -5688,22 +5688,30 @@ public final class L2PcInstance extends L2Playable
 					{
 						// Set proper chance according to Item type of equipped Item
 						itemDropPercent = itemDrop.getItem().getType2() == L2Item.TYPE2_WEAPON ? dropEquipWeapon : dropEquip;
-						getInventory().unEquipItemInSlotAndRecord(itemDrop.getLocationSlot());
 					}
 					else itemDropPercent = dropItem; // Item in inventory
 
 					// NOTE: Each time an item is dropped, the chance of another item being dropped gets lesser (dropCount * 2)
 					if (Rnd.get(100) < itemDropPercent)
 					{
+						if (itemDrop.isEquipped()) {
+							getInventory().unEquipItemInSlotAndRecord(itemDrop.getLocationSlot());
+						}
+
 						if (Config.ALT_PLAYER_DROP_CAN_BE_CRYSTALIZED &&
 								itemDrop.getCrystalCount() > 0 &&
 								Rnd.get(100) < Config.ALT_PLAYER_DROP_CRYSTALIZATION_CHANCE) {
 
 							// Remove the actual item from inventory
-							L2ItemInstance removedItem = this.getInventory().destroyItem("Crystalize", itemDrop.getItemId(), itemDrop.getCount(), this, null);
+							L2ItemInstance removedItem = this.getInventory().destroyItem("Crystalize", itemDrop.getObjectId(), itemDrop.getCount(), this, null);
+
 							InventoryUpdate iu = new InventoryUpdate();
 							iu.addRemovedItem(removedItem);
 							this.sendPacket(iu);
+
+							SystemMessage sm = new SystemMessage(SystemMessageId.S1_CRYSTALLIZED);
+							sm.addItemName(removedItem);
+							this.sendPacket(sm);
 
 							// Replace with crystals
 							int crystalId = itemDrop.getItem().getCrystalItemId();

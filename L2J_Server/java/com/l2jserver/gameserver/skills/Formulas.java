@@ -48,6 +48,7 @@ import com.l2jserver.gameserver.model.zone.type.L2ClanHallZone;
 import com.l2jserver.gameserver.model.zone.type.L2FortZone;
 import com.l2jserver.gameserver.model.zone.type.L2MotherTreeZone;
 import com.l2jserver.gameserver.model.actor.instance.L2MonsterInstance;
+import com.l2jserver.gameserver.model.actor.instance.L2GuardInstance;
 import com.l2jserver.gameserver.network.SystemMessageId;
 import com.l2jserver.gameserver.network.serverpackets.SystemMessage;
 import com.l2jserver.gameserver.skills.conditions.ConditionPlayerState;
@@ -976,12 +977,9 @@ public final class Formulas
 			}
 
 			if (L2MonsterInstance.class.isAssignableFrom(cha.getClass()) && !cha.isRaid()) {
-				L2MonsterInstance npcInstance = (L2MonsterInstance) cha;
-				if (npcInstance.getTemplate().getType().equals("L2Guard")) {
-					value = baseValue * guardMultiplier;
-				} else {
-					value = baseValue * monsterMultiplier;
-				}
+				value = baseValue * monsterMultiplier;
+			} else if (L2GuardInstance.class.isAssignableFrom(cha.getClass())) {
+				value = baseValue * guardMultiplier;
 			} else if (cha.isRaid()) {
 				value = baseValue * raidMultiplier;
 			} else {
