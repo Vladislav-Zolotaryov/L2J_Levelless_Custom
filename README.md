@@ -11,3 +11,5 @@
 - ~~Make low level monsters stronger~~
 - ~~Show grade or original level as title~~
 - ~~Adjust Alt Click drop colors~~
+- Remove D, C, B Grade shops
+- 
