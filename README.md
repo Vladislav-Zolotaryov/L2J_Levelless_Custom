@@ -18,13 +18,14 @@
 - Castle learn special skills for low level
 - Castle Lord of the manor certificate of approval
 - Test Siege
-- Demonic Weapons rate
+- ~~Demonic Weapons rate~~
 - Devil Isle survivor
-- Sub level 85 at start
+- ~~Sub level 85 at start~~
 - Remove transformations into mobs
 - Remove Transaction books from shops
 - Fix Antharas
 - Remove instant HP an CP potions (elixirs are fine)
+- Remove html 'Buy basic-type accessory'
 - ~~Remove Dimensions Merchants~~
 - ~~Remove B grade from Luxury shop~~
 - ~~Remove Item Broker~~
