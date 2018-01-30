@@ -2,35 +2,35 @@
 - Adjust drop rates
 - Disable Gracia and Hellbound
 - Remove D, C, B Grade shops
-- Check spellbooks accessibility (spellbook sellers)
-- ~~Allow cloak be equipped with A and S sets~~
 - Remove adventurer guide
 - Remove pathfinder worker
 - Remove Try on
 - Remove trade basic equip
-- Remove fantasy Island
-- Remove Gludio Airfield
+- Remove fantasy Island (Move to fantasy isle)
+- Remove Gludio Airship field
 - Remove Cube Fragments Shop
 - Remove Kamaloka, Chamber of Delusions and Pailaka
 - Review Epilogue Dynasty farm zones
 - Test Finshing rates
 - Trader Lorenzo
 - Newbie Guide
-- ~~Remove herb drop~~ Set drop rates to 0
 - Castle learn special skills for low level
-- ~~Castle Lord of the manor certificate of approval~~ Useless, removed
 - Test Siege
 - Check honorary item
-- ~~Demonic Weapons rate~~
 - Devil Isle survivor
 - Den of Evil
 - Crypt of Disgrace
-- ~~Sub level 85 at start~~
-- Remove transformations into mobs
-- Remove transformations books from shops
 - Fix Antharas
 - Remove instant HP an CP potions (elixirs are fine)
 - Remove html 'Buy basic-type accessory'
+- ~~Remove transformations into mobs~~
+- ~~Remove transformations books from shops~~
+- ~~Remove herb drop~~ Set drop rates to 0
+- ~~Castle Lord of the manor certificate of approval~~ Useless, removed
+- ~~Sub level 85 at start~~
+- ~~Demonic Weapons rate~~
+- ~~Check spellbooks accessibility (spellbook sellers)~~ (470+ spellbook drops are needed to make this, hell no)
+- ~~Allow cloak be equipped with A and S sets~~
 - ~~Remove Dimensions Merchants~~
 - ~~Remove B grade from Luxury shop~~
 - ~~Remove Item Broker~~
