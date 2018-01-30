@@ -15,6 +15,7 @@
 			<mul order="0x30" stat="pvpPhysDef" val="1.05" />
 			<mul order="0x30" stat="pvpMagicalDef" val="1.05" />
 			<mul order="0x30" stat="pvpPhysSkillsDef" val="1.05" />
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8201" levels="1" name="Major Arcana Robe Set - PvP">
@@ -33,6 +34,7 @@
 			<mul order="0x30" stat="pvpPhysDef" val="1.05" />
 			<mul order="0x30" stat="pvpMagicalDef" val="1.05" />
 			<mul order="0x30" stat="pvpPhysSkillsDef" val="1.05" />
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8202" levels="1" name="Dynasty Breastplate - PvP">
@@ -48,6 +50,7 @@
 			<mul order="0x30" stat="pvpPhysDef" val="1.05" />
 			<mul order="0x30" stat="pvpMagicalDef" val="1.05" />
 			<mul order="0x30" stat="pvpPhysSkillsDef" val="1.05" />
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8203" levels="1" name="Dynasty Breastplate - PvP Shield Master">
@@ -135,6 +138,7 @@
 			<mul order="0x30" stat="pvpPhysDef" val="1.05" />
 			<mul order="0x30" stat="pvpMagicalDef" val="1.05" />
 			<mul order="0x30" stat="pvpPhysSkillsDef" val="1.05" />
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8208" levels="1" name="Dynasty Leather Armor - PvP Dagger Master">
@@ -186,6 +190,7 @@
 			<mul order="0x30" stat="pvpPhysDef" val="1.05" />
 			<mul order="0x30" stat="pvpMagicalDef" val="1.05" />
 			<mul order="0x30" stat="pvpPhysSkillsDef" val="1.05" />
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8211" levels="1" name="Dynasty Tunic - PvP Healer">
@@ -1015,6 +1020,7 @@
 			<add order="0x40" stat="maxHp" val="531" /> <!-- Max HP by 531 -->
 			<mul order="0x30" stat="sleepVuln" val="0.3" /> <!-- resistance to sleep by 70% -->
 			<mul order="0x30" stat="rootVuln" val="0.3" /> <!-- resistance to hold by 70% -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8284" levels="1" name="Vesper Noble Heavy Armor Set">
@@ -1044,6 +1050,7 @@
 			<mul order="0x30" stat="pAtkSpd" val="1.0557" /> <!-- Atk. Spd. +5.57% -->
 			<mul order="0x30" stat="regMp" val="1.0557" /> <!-- MP Recovery Rate by 5.57% -->
 			<add order="0x40" stat="maxMp" val="347.4" /> <!-- Max MP by 347.4 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8286" levels="1" name="Vesper Noble Light Armor Set">
@@ -1074,6 +1081,7 @@
 			<mul order="0x30" stat="regMp" val="1.0557" /> <!-- MP Recovery Rate by 5.57% -->
 			<mul order="0x30" stat="stunVuln" val="0.5" /> <!-- resistance to Stun Attacks by 50% -->
 			<sub order="0x40" stat="cancel" val="30" /> <!-- decreases the damage to be cancelled by magic by 30 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="8288" levels="1" name="Vesper Noble Robe Set">
@@ -1094,12 +1102,12 @@
 	</skill>
 	<skill id="8289" levels="1" name="Special Ability Focus">
 		<!--
-			Note: With Gracia Final there are 4 new SA Focus skills and 4 levels of focus for the new Vesper weapons. 
+			Note: With Gracia Final there are 4 new SA Focus skills and 4 levels of focus for the new Vesper weapons.
 			Not too hard to figure out what goes where...
 		-->
 		<!--
-			Guessing... 
-			14130 Vesper Fighter - Focus 8289 1 
+			Guessing...
+			14130 Vesper Fighter - Focus 8289 1
 			14490 Vesper Fighter {PvP} - Focus 8289 1
 		-->
 		<set name="target" val="TARGET_SELF" />
@@ -1172,16 +1180,16 @@
 	</skill>
 	<skill id="8295" levels="1" name="Special Ability Focus">
 		<!--
-			Note: With Gracia Final there are 4 new SA Focus skills and 4 levels of focus for the new Vesper weapons. 
+			Note: With Gracia Final there are 4 new SA Focus skills and 4 levels of focus for the new Vesper weapons.
 			Not too hard to figure out what goes where...
 		-->
 		<!--
-			Guessing... 
-			14120 Vesper Cutter - Focus 8295 1 
-			14123 Vesper Slasher - Focus 8295 1 
-			14480 Vesper Cutter {PvP} - Focus 8295 1 
-			14483 Vesper Slasher {PvP} - Focus 8295 1 
-			14159 Vesper Nagan - Focus 8295 1 
+			Guessing...
+			14120 Vesper Cutter - Focus 8295 1
+			14123 Vesper Slasher - Focus 8295 1
+			14480 Vesper Cutter {PvP} - Focus 8295 1
+			14483 Vesper Slasher {PvP} - Focus 8295 1
+			14159 Vesper Nagan - Focus 8295 1
 			14519 Vesper Nagan {PvP} - Focus 8295 1
 		-->
 		<set name="target" val="TARGET_SELF" />
@@ -1197,14 +1205,14 @@
 	</skill>
 	<skill id="8296" levels="1" name="Special Ability Focus">
 		<!--
-			Note: With Gracia Final there are 4 new SA Focus skills and 4 levels of focus for the new Vesper weapons. 
+			Note: With Gracia Final there are 4 new SA Focus skills and 4 levels of focus for the new Vesper weapons.
 			Not too hard to figure out what goes where...
 		-->
 		<!--
-			Guessing... 
-			14153 Vesper Pincer - Focus 8296 1 
-			14155 Vesper Sheutjeh - Focus 8296 1 
-			14513 Vesper Pincer {PvP} - Focus 8296 1 
+			Guessing...
+			14153 Vesper Pincer - Focus 8296 1
+			14155 Vesper Sheutjeh - Focus 8296 1
+			14513 Vesper Pincer {PvP} - Focus 8296 1
 			14515 Vesper Sheutjeh {PvP} - Focus 8296 1
 		-->
 		<set name="target" val="TARGET_SELF" />
@@ -1220,20 +1228,20 @@
 	</skill>
 	<skill id="8297" levels="1" name="Special Ability Haste">
 		<!--
-			Guessing... 
-			14118 Vesper Cutter - Haste 8297 1 
-			14121 Vesper Slasher - Haste 8297 1 
-			14129 Vesper Shaper - Haste 8297 1 
-			14135 Vesper Stormer - Haste 8297 1 
-			14151 Vesper Pincer - Haste 8297 1 
-			14157 Vesper Nagan - Haste 8297 1 
-			14402 Icarus Hand {PvP} - Haste 8297 1 
-			14452 Icarus Hand - Destruction {PvP} - Haste 8297 1 
-			14478 Vesper Cutter {PvP} - Haste 8297 1 
-			14481 Vesper Slasher {PvP} - Haste 8297 1 
-			14489 Vesper Shaper {PvP} - Haste 8297 1 
-			14495 Vesper Stormer {PvP} - Haste 8297 1 
-			14511 Vesper Pincer {PvP} - Haste 8297 1 
+			Guessing...
+			14118 Vesper Cutter - Haste 8297 1
+			14121 Vesper Slasher - Haste 8297 1
+			14129 Vesper Shaper - Haste 8297 1
+			14135 Vesper Stormer - Haste 8297 1
+			14151 Vesper Pincer - Haste 8297 1
+			14157 Vesper Nagan - Haste 8297 1
+			14402 Icarus Hand {PvP} - Haste 8297 1
+			14452 Icarus Hand - Destruction {PvP} - Haste 8297 1
+			14478 Vesper Cutter {PvP} - Haste 8297 1
+			14481 Vesper Slasher {PvP} - Haste 8297 1
+			14489 Vesper Shaper {PvP} - Haste 8297 1
+			14495 Vesper Stormer {PvP} - Haste 8297 1
+			14511 Vesper Pincer {PvP} - Haste 8297 1
 			14517 Vesper Nagan {PvP} - Haste 8297 1
 		-->
 		<set name="target" val="TARGET_SELF" />
@@ -1253,8 +1261,8 @@
 			Not too hard to figure out what goes where...
 		-->
 		<!--
-			Guessing... 
-			14149 Vesper Thrower - Focus 8298 1 
+			Guessing...
+			14149 Vesper Thrower - Focus 8298 1
 			14509 Vesper Thrower {PvP} - Focus 8298 1
 		-->
 		<set name="target" val="TARGET_SELF" />

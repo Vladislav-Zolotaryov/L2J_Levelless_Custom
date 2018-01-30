@@ -291,6 +291,7 @@
 			<mul order="0x30" stat="paralyzeVuln" val="0.5" /> <!-- Paralysis Resistance +50% -->
 			<sub order="0x10" stat="STR" val="2" /> <!-- STR -2 -->
 			<add order="0x10" stat="CON" val="2" /> <!-- CON +2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3531" levels="1" name="Tallum Heavy Armor Set">
@@ -304,6 +305,7 @@
 			<mul order="0x30" stat="bleedVuln" val="0.2" /> <!-- Bleed Resistance +80% -->
 			<add order="0x10" stat="STR" val="2" /> <!-- STR +2 -->
 			<sub order="0x10" stat="CON" val="2" /> <!-- CON -2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3532" levels="1" name="Dark Crystal Light Armor Set">
@@ -316,6 +318,7 @@
 			<mul order="0x30" stat="paralyzeVuln" val="0.5" /> <!-- Paralysis Resistance +50% -->
 			<add order="0x10" stat="STR" val="1" /> <!-- STR +1 -->
 			<sub order="0x10" stat="CON" val="1" /> <!-- CON -1 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3533" levels="1" name="Tallum Light Armor Set">
@@ -329,6 +332,7 @@
 			<mul order="0x30" stat="bleedVuln" val="0.2" /> <!-- Bleed Resistance +80% -->
 			<add order="0x10" stat="MEN" val="2" /> <!-- MEN +2 -->
 			<sub order="0x10" stat="WIT" val="2" /> <!-- WIT -2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3534" levels="1" name="Tallum Robe Set">
@@ -342,6 +346,7 @@
 			<mul order="0x30" stat="bleedVuln" val="0.2" /> <!-- Bleed Resistance +80% -->
 			<sub order="0x10" stat="INT" val="2" /> <!-- INT -2 -->
 			<add order="0x10" stat="WIT" val="2" /> <!-- WIT +2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3535" levels="1" name="Dark Crystal Robe Set">
@@ -356,6 +361,7 @@
 			<mul order="0x30" stat="paralyzeVuln" val="0.5" /> <!-- Paralysis Resistance +50% -->
 			<add order="0x10" stat="WIT" val="2" /> <!-- WIT +2 -->
 			<sub order="0x10" stat="MEN" val="2" /> <!-- MEN -2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3536" levels="1" name="Nightmare Heavy Armor Set">
@@ -368,6 +374,7 @@
 			<mul order="0x30" stat="rootVuln" val="0.3" /> <!-- Hold Resistance +70% -->
 			<add order="0x10" stat="CON" val="2" /> <!-- CON +2 -->
 			<sub order="0x10" stat="DEX" val="2" /> <!-- DEX -2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3537" levels="1" name="Majestic Heavy Armor Set">
@@ -380,6 +387,7 @@
 			<mul order="0x30" stat="stunVuln" val="0.5" /> <!-- Stun Resistance +50% -->
 			<add order="0x10" stat="STR" val="2" /> <!-- STR +2 -->
 			<sub order="0x10" stat="CON" val="2" /> <!-- CON -2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3538" levels="1" name="Nightmarish Leather Light Armor Set">
@@ -393,6 +401,7 @@
 			<add order="0x40" stat="absorbDam" val="3" /> <!-- Restores 3% of melee damage inflicted on the enemy to oneself -->
 			<add order="0x10" stat="DEX" val="1" /> <!-- DEX +1 -->
 			<sub order="0x10" stat="CON" val="1" /> <!-- CON -1 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3539" levels="1" name="Majestic Light Armor Set">
@@ -408,6 +417,7 @@
 			<mul order="0x30" stat="stunVuln" val="0.5" /> <!-- Stun Resistance +50% -->
 			<add order="0x10" stat="DEX" val="1" /> <!-- DEX +1 -->
 			<sub order="0x10" stat="CON" val="1" /> <!-- CON -1 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3540" levels="1" name="Nightmare Robe Set">
@@ -421,6 +431,7 @@
 			<mul order="0x30" stat="rootVuln" val="0.3" /> <!-- Hold Resistance +70% -->
 			<add order="0x10" stat="INT" val="2" /> <!-- INT +2 -->
 			<sub order="0x10" stat="WIT" val="2" /> <!-- WIT -2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3541" levels="1" name="Majestic Robe Set">
@@ -434,6 +445,7 @@
 			<mul order="0x30" stat="stunVuln" val="0.5" /> <!-- Stun Resistance +50% -->
 			<add order="0x10" stat="MEN" val="1" /> <!-- MEN +1 -->
 			<sub order="0x10" stat="INT" val="1" /> <!-- INT -1 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3542" levels="6" name="Special Ability: Critical Damage">
@@ -442,7 +454,7 @@
 			6348 Berserker Blade - Critical Damage bigsword 3542-4; Increases P. Atk. by 270 on a critical attack.
 		-->
 		<!--
-			Guessing... 
+			Guessing...
 			9298 Saber Tooth - Critical Damage ancient 3542-4; Kamael Exclusive Weapon: Berserker Blade. Increases P. Atk. by 270 on a critical attack.
 		-->
 		<table name="#cAtkAdd"> 203.97 226.51 248.71 269.91 289.4 306.42 </table>
@@ -560,6 +572,7 @@
 			<mul order="0x30" stat="rootVuln" val="0.3" /> <!-- Hold Probability -70% -->
 			<sub order="0x10" stat="DEX" val="2" /> <!-- DEX -2 -->
 			<add order="0x10" stat="STR" val="2" /> <!-- STR +2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3554" levels="1" name="Equipped with Shield">
@@ -584,6 +597,7 @@
 			<add order="0x10" stat="DEX" val="1" /> <!-- DEX +1 -->
 			<add order="0x10" stat="STR" val="1" /> <!-- STR +1 -->
 			<sub order="0x10" stat="CON" val="2" /> <!-- CON -2 -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3556" levels="1" name="Major Arcana Robe Set">
@@ -599,6 +613,7 @@
 			<add order="0x10" stat="INT" val="1" /> <!-- INT +1 -->
 			<sub order="0x10" stat="MEN" val="2" /> <!-- MEN -2 -->
 			<mul order="0x30" stat="stunVuln" val="0.5" /> <!-- Stun resistance +50% -->
+			<add order="0x10" stat="cloak" val="1" />
 		</for>
 	</skill>
 	<skill id="3557" levels="1" name="Necklace of Valakas">
@@ -702,22 +717,22 @@
 	<skill id="3564" levels="2" name="Special Ability: Haste">
 		<!-- s_opt_haste75 -->
 		<!--
-			6581 Forgotten Blade - Haste sword 3564-1; Increases Atk. Spd. by about 7%. Increases damage inflicted during PvP. 
-			6592 Angel Slayer - Haste 3564-1; Increases Atk. Spd. by about 7%. Increases damage inflicted during PvP. 
+			6581 Forgotten Blade - Haste sword 3564-1; Increases Atk. Spd. by about 7%. Increases damage inflicted during PvP.
+			6592 Angel Slayer - Haste 3564-1; Increases Atk. Spd. by about 7%. Increases damage inflicted during PvP.
 			6605 Heavens Divider - Haste bigsword 3564-1; Increases Atk. Spd. by about 7%. Increases damage inflicted during PvP.
 		-->
 		<!--
-			Guessing... 
-			8108 Infernal Master - Haste bigsword 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted on one's opponent during PvP. 
-			9333 Divine Pain - Haste ancient 3564-2; Kamael Exclusive Weapon: Infernal Master Conversion Increases Atk. Spd. by about 6%. Enhances damage to a target during PvP. 
-			8127 Destroyer Hammer - Haste bigblunt 3564-2; Increases Atk. Sp.d by 6%. Increases damage inflicted during PvP. 
-			8788 Sirra's Blade - Haste sword 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted during PvP. 
-			9353 Eclair Bijou - Haste rapier 3564-2; Kamael Exclusive Weapon: Sirra's Blade Conversion Increases Atk. Spd. by about 6%. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members. 
-			8792 Sword of Ipos - Haste bigsword 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted during PvP. 
-			9358 Durendal - Haste ancient 3564-2; Kamael Exclusive Weapon: Sword of Ipos Conversion Increases Atk. Spd. by about 6%. Enhances damage to a target during PvP. 
-			8795 Barakiel's Axe - Haste blunt 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted during PvP. 
-			8810 Sobekk's Hurricane - Haste dualfist 3564-2; Increases Atk. Spd. by about 6%. Increases damage inflicted during PvP. 
-			9365 Laevateinn - Haste rapier 3564-1; Kamael Exclusive Weapon: Forgotten Blade Conversion Increases Atk. Spd. by about 7%. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members. 
+			Guessing...
+			8108 Infernal Master - Haste bigsword 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted on one's opponent during PvP.
+			9333 Divine Pain - Haste ancient 3564-2; Kamael Exclusive Weapon: Infernal Master Conversion Increases Atk. Spd. by about 6%. Enhances damage to a target during PvP.
+			8127 Destroyer Hammer - Haste bigblunt 3564-2; Increases Atk. Sp.d by 6%. Increases damage inflicted during PvP.
+			8788 Sirra's Blade - Haste sword 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted during PvP.
+			9353 Eclair Bijou - Haste rapier 3564-2; Kamael Exclusive Weapon: Sirra's Blade Conversion Increases Atk. Spd. by about 6%. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members.
+			8792 Sword of Ipos - Haste bigsword 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted during PvP.
+			9358 Durendal - Haste ancient 3564-2; Kamael Exclusive Weapon: Sword of Ipos Conversion Increases Atk. Spd. by about 6%. Enhances damage to a target during PvP.
+			8795 Barakiel's Axe - Haste blunt 3564-2; Increases Atk. Spd. by 6%. Increases damage inflicted during PvP.
+			8810 Sobekk's Hurricane - Haste dualfist 3564-2; Increases Atk. Spd. by about 6%. Increases damage inflicted during PvP.
+			9365 Laevateinn - Haste rapier 3564-1; Kamael Exclusive Weapon: Forgotten Blade Conversion Increases Atk. Spd. by about 7%. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members.
 			9369 Gram - Haste ancient 3564-1; Kamael Exclusive Weapon: Heavens Divider Conversion Increases Atk. Spd. by about 7%. Enhances damage to a target during PvP.
 		-->
 		<table name="#pAtkSpd"> 1.07 1.06 </table> <!-- Guessing Level 2 -->
@@ -735,24 +750,24 @@
 	<skill id="3565" levels="2" name="Special Ability: Focus">
 		<!-- s_opt_focus_low_cri75 -->
 		<!--
-			Note: In C4 official files, 3565, 3566, and 3567 have 1 skill level. In our current datapack/client, they go up to 2. 
+			Note: In C4 official files, 3565, 3566, and 3567 have 1 skill level. In our current datapack/client, they go up to 2.
 			I believe this was done by NCSoft as a way of adding in support the next generation of weapons that have critical increases in three levels, 106, 111, and 116.
 		-->
 		<!--
 			6602 Demon Splinter - Focus 3565-1; Increases critical chance by 80. Increases damage inflicted during PvP.
 		-->
 		<!--
-			Guessing... 
-			9879 Dynasty Bagh-Nakh - Focus 3565-2; Increases critical attack by 106. Increases damage inflicted during PvP. 
-			10459 Icarus Hand - Focus 3565-2; Increases critical attack by 106. Increases damage inflicted during PvP. 
-			10728 Demon Splinter {PvP} - Focus 3565-1; 
-			10769 Dynasty Bagh-Nakh {PvP} - Focus 3565-2; 
-			11195 Demon Splinter - Thunder - Focus 3565-1; 
-			11262 Dynasty Bagh-Nakh - Great Gale - Focus 3565-2; 
-			11339 Icarus Hand - Destruction - Focus 3565-2; 
-			12898 Demon Splinter - Thunder {PvP} - Focus 3565-1; 
-			12949 Dynasty Bagh-Nakh - Great Gale {PvP} - Focus 3565-2; 
-			14401 Icarus Hand {PvP} - Focus 3565-2; 
+			Guessing...
+			9879 Dynasty Bagh-Nakh - Focus 3565-2; Increases critical attack by 106. Increases damage inflicted during PvP.
+			10459 Icarus Hand - Focus 3565-2; Increases critical attack by 106. Increases damage inflicted during PvP.
+			10728 Demon Splinter {PvP} - Focus 3565-1;
+			10769 Dynasty Bagh-Nakh {PvP} - Focus 3565-2;
+			11195 Demon Splinter - Thunder - Focus 3565-1;
+			11262 Dynasty Bagh-Nakh - Great Gale - Focus 3565-2;
+			11339 Icarus Hand - Destruction - Focus 3565-2;
+			12898 Demon Splinter - Thunder {PvP} - Focus 3565-1;
+			12949 Dynasty Bagh-Nakh - Great Gale {PvP} - Focus 3565-2;
+			14401 Icarus Hand {PvP} - Focus 3565-2;
 			14451 Icarus Hand - Destruction {PvP} - Focus 3565-2;
 		-->
 		<table name="#rCrit"> 80.6 106 </table> <!-- Guessing Level 2, see notes. -->
@@ -771,60 +786,60 @@
 	<skill id="3566" levels="2" name="Special Ability: Focus">
 		<!-- s_opt_focus_medium_cri75 -->
 		<!--
-			Note: In C4 official files, 3565, 3566, and 3567 have 1 skill level. In our current datapack/client, they go up to 2. 
+			Note: In C4 official files, 3565, 3566, and 3567 have 1 skill level. In our current datapack/client, they go up to 2.
 			I believe this was done by NCSoft as a way of adding in support the next generation of weapons that have critical increases in three levels, 106, 111, and 116.
 		-->
 		<!--
-			6583 Forgotten Blade - Focus 3566-1; Increases critical chance by 84. Increases damage inflicted during PvP. 
-			6607 Heavens Divider - Focus 3566-1; Increases critical chance by 84. Increases damage inflicted during PvP. 
-			9367 Laevateinn - Focus 3566-1; Kamael exclusive weapon: Forgotten Blade Conversion Increases Critical Attack by 84. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members. 
+			6583 Forgotten Blade - Focus 3566-1; Increases critical chance by 84. Increases damage inflicted during PvP.
+			6607 Heavens Divider - Focus 3566-1; Increases critical chance by 84. Increases damage inflicted during PvP.
+			9367 Laevateinn - Focus 3566-1; Kamael exclusive weapon: Forgotten Blade Conversion Increases Critical Attack by 84. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members.
 			9371 Gram - Focus 3566-1; Kamael Exclusive Weapon: Heavens Divider Conversion Increases Critical Attack by 84. Enhances damage to a target during PvP.
 		-->
 		<!--
-			Guessing... 
-			9377 Dynasty Rapier - Focus 3566-2; Kamael exclusive weapon: Dynasty Sword Conversion Increases critical attack by 111. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members. 
-			9381 Dynasty Ancient Sword - Focus 3566-2; Kamael exclusive weapon: Dynasty Blade Conversion Increases critical attack by 111. Increases damage inflicted during PvP. 
-			9854 Dynasty Sword - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP. 
-			9857 Dynasty Blade - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP. 
-			10434 Icarus Sawsword - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP. 
-			10437 Icarus Heavy Arms - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP. 
-			10461 Icarus Stinger - Focus 3566-2; Kamael exclusive weapon: Icarus Sawsword Conversion Critical Attack is increased by 111. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members. 
-			10464 Icarus Wingblade - Focus 3566-2; Kamael exclusive weapon: Icarus Heavy Arms Conversion Critical Attack is increased by 111. Increases damage inflicted during PvP. 
-			10712 Forgotten Blade {PvP} - Focus 3566-1 
-			10715 Heavens Divider {PvP} - Focus 3566-1 
-			10742 Laevateinn {PvP} - Focus 3566-1 
-			10745 Gram {PvP} - Focus 3566-1; 
-			10750 Dynasty Sword {PvP} - Focus 3566-2; 
-			10753 Dynasty Blade {PvP} - Focus 3566-2; 
-			10783 Dynasty Rapier {PvP} - Focus 3566-2; 
-			10786 Dynasty Ancient Sword {PvP} - Focus 3566-2; 
-			11193 Gram - Thunder - Focus 3566-1; 
-			11209 Laevateinn - Lightning - Focus 3566-1 
-			11238 Forgotten Blade - Lightning - Focus 3566-1 
-			11242 Heaven's Divider - Lightning - Focus 3566-1 
-			11244 Dynasty Ancient Sword - Great Gale - Focus 3566-2; 
-			11253 Dynasty Rapier - Earth - Focus 3566-2; 
-			11269 Dynasty Blade - Great Gale - Focus 3566-2; 
-			11273 Dynasty Sword - Earth - Focus 3566-2; 
-			11306 Icarus Sawsword - Destruction - Focus 3566-2; 
-			11314 Icarus Stinger - Destruction - Focus 3566-2; 
-			11326 Icarus Wingblade - Lightning - Focus 3566-2; 
-			11342 Icarus Heavy Arms - Lightning - Focus 3566-2; 
-			12897 Gram - Thunder {PvP} - Focus 3566-1; 
-			12909 Laevateinn - Lightning {PvP} - Focus 3566-1 
-			12931 Forgotten Blade - Lightning {PvP} - Focus 3566-1; 
-			12934 Heavens Divider - Thunder {PvP} - Focus 3566-1 
-			12935 Dynasty Ancient Sword - Great Gale {PvP} - Focus 3566-2; 
-			12942 Dynasty Rapier - Earth {PvP} - Focus 3566-2; 
-			12954 Dynasty Blade - Great Gale {PvP} - Focus 3566-2; 
-			12957 Dynasty Sword - Earth {PvP} - Focus 3566-2; 
-			14376 Icarus Sawsword {PvP} - Focus 3566-2; 
-			14379 Icarus Heavy Arms {PvP} - Focus 3566-2; 
-			14403 Icarus Stinger {PvP} - Focus 3566-2; 
-			14406 Icarus Wingblade {PvP} - Focus 3566-2; 
-			14418 Icarus Sawsword - Destruction {PvP} - Focus 3566-2; 
-			14426 Icarus Stinger - Destruction {PvP} - Focus 3566-2; 
-			14438 Icarus Wingblade - Lightning {PvP} - Focus 3566-2; 
+			Guessing...
+			9377 Dynasty Rapier - Focus 3566-2; Kamael exclusive weapon: Dynasty Sword Conversion Increases critical attack by 111. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members.
+			9381 Dynasty Ancient Sword - Focus 3566-2; Kamael exclusive weapon: Dynasty Blade Conversion Increases critical attack by 111. Increases damage inflicted during PvP.
+			9854 Dynasty Sword - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP.
+			9857 Dynasty Blade - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP.
+			10434 Icarus Sawsword - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP.
+			10437 Icarus Heavy Arms - Focus 3566-2; Increases Critical Attack by 111. Increases damage inflicted during PvP.
+			10461 Icarus Stinger - Focus 3566-2; Kamael exclusive weapon: Icarus Sawsword Conversion Critical Attack is increased by 111. Increases damage inflicted during PvP. When enchanted by 4 or more, a critical attack will have a chance to increase P. Atk., M. Atk., and healing power, and decrease MP consumption during skill use, for you and your party members.
+			10464 Icarus Wingblade - Focus 3566-2; Kamael exclusive weapon: Icarus Heavy Arms Conversion Critical Attack is increased by 111. Increases damage inflicted during PvP.
+			10712 Forgotten Blade {PvP} - Focus 3566-1
+			10715 Heavens Divider {PvP} - Focus 3566-1
+			10742 Laevateinn {PvP} - Focus 3566-1
+			10745 Gram {PvP} - Focus 3566-1;
+			10750 Dynasty Sword {PvP} - Focus 3566-2;
+			10753 Dynasty Blade {PvP} - Focus 3566-2;
+			10783 Dynasty Rapier {PvP} - Focus 3566-2;
+			10786 Dynasty Ancient Sword {PvP} - Focus 3566-2;
+			11193 Gram - Thunder - Focus 3566-1;
+			11209 Laevateinn - Lightning - Focus 3566-1
+			11238 Forgotten Blade - Lightning - Focus 3566-1
+			11242 Heaven's Divider - Lightning - Focus 3566-1
+			11244 Dynasty Ancient Sword - Great Gale - Focus 3566-2;
+			11253 Dynasty Rapier - Earth - Focus 3566-2;
+			11269 Dynasty Blade - Great Gale - Focus 3566-2;
+			11273 Dynasty Sword - Earth - Focus 3566-2;
+			11306 Icarus Sawsword - Destruction - Focus 3566-2;
+			11314 Icarus Stinger - Destruction - Focus 3566-2;
+			11326 Icarus Wingblade - Lightning - Focus 3566-2;
+			11342 Icarus Heavy Arms - Lightning - Focus 3566-2;
+			12897 Gram - Thunder {PvP} - Focus 3566-1;
+			12909 Laevateinn - Lightning {PvP} - Focus 3566-1
+			12931 Forgotten Blade - Lightning {PvP} - Focus 3566-1;
+			12934 Heavens Divider - Thunder {PvP} - Focus 3566-1
+			12935 Dynasty Ancient Sword - Great Gale {PvP} - Focus 3566-2;
+			12942 Dynasty Rapier - Earth {PvP} - Focus 3566-2;
+			12954 Dynasty Blade - Great Gale {PvP} - Focus 3566-2;
+			12957 Dynasty Sword - Earth {PvP} - Focus 3566-2;
+			14376 Icarus Sawsword {PvP} - Focus 3566-2;
+			14379 Icarus Heavy Arms {PvP} - Focus 3566-2;
+			14403 Icarus Stinger {PvP} - Focus 3566-2;
+			14406 Icarus Wingblade {PvP} - Focus 3566-2;
+			14418 Icarus Sawsword - Destruction {PvP} - Focus 3566-2;
+			14426 Icarus Stinger - Destruction {PvP} - Focus 3566-2;
+			14438 Icarus Wingblade - Lightning {PvP} - Focus 3566-2;
 			14454 Icarus Heavy Arms - Lightning {PvP} - Focus 3566-2;
 		-->
 		<table name="#rCrit"> 84.3 111 </table> <!-- Guessing Level 2, see notes. -->
@@ -843,45 +858,45 @@
 	<skill id="3567" levels="2" name="Special Ability: Focus">
 		<!-- s_opt_focus_high_cri75 -->
 		<!--
-			Note: In C4 official files, 3565, 3566, and 3567 have 1 skill level. In our current datapack/client, they go up to 2. 
+			Note: In C4 official files, 3565, 3566, and 3567 have 1 skill level. In our current datapack/client, they go up to 2.
 			I believe this was done by NCSoft as a way of adding in support the next generation of weapons that have critical increases in three levels, 106, 111, and 116.
 		-->
 		<!--
-			7577 Draconic Bow - Focus 3567-1; Increases Critical Attack by 88. Enhances damage to a target during PvP. 
+			7577 Draconic Bow - Focus 3567-1; Increases Critical Attack by 88. Enhances damage to a target during PvP.
 			9374 Sarunga - Focus 3567-1; Kamael Exclusive Weapon: Draconic Bow Conversion Increases Critical Attack by 88. Enhances damage to a target during PvP.
 		-->
 		<!--
-			Guessing... 
-			6594 Shining Bow - Focus 3567-1; 
-			9387 Dynasty Crossbow - Focus 3567-2; Kamael exclusive weapon: Dynasty Bow Conversion Increases critical attack by 116. Increases damage inflicted during PvP. 
-			9865 Dynasty Bow - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP. 
-			9866 Dynasty Knife - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP. 
-			10445 Icarus Spitter - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP. 
-			10446 Icarus Disperser - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP. 
-			10469 Icarus Shooter - Focus 3567-2; Kamael exclusive weapon: Icarus Spitter Conversion Critical Attack is increased by 116. Increases damage inflicted during PvP. 
-			10738 Draconic Bow {PvP} - Focus 3567-1; 
-			10747 Sarunga - PvP - Focus 3567-1; 
-			10762 Dynasty Knife {PvP} - Focus 3567-2; 
-			10782 Dynasty Bow {PvP} - Focus 3567-2; 
-			10791 Dynasty Crossbow - PvP - Focus 3567-2; 
-			11200 Draconic Bow - Earth - Focus 3567-1; 
-			11216 Sarunga - Earth - Focus 3567-1; 
-			11248 Dynasty Knife - Great Gale - Focus 3567-2; 
-			11267 Dynasty Bow - Great Gale - Focus 3567-2; 
-			11291 Dynasty Crossbow - Great Gale - Focus 3567-2; 
-			11302 Icarus Disperser - Confusion - Focus 3567-2; 
-			11312 Icarus Shooter - Concentration - Focus 3567-2; 
-			11324 Icarus Spitter - Concentration - Focus 3567-2; 
-			12902 Draconic Bow - Earth {PvP} - Focus 3567-1; 
-			12914 Sarunga - Earth {PvP} - Focus 3567-1; 
-			12938 Dynasty Knife - Great Gale {PvP} - Focus 3567-2; 
-			12953 Dynasty Bow - Great Gale {PvP} - Focus 3567-2; 
-			12971 Dynasty Crossbow - Great Gale {PvP} - Focus 3567-2; 
-			14387 Icarus Spitter {PvP} - Focus 3567-2; 
-			14388 Icarus Disperser {PvP} - Focus 3567-2; 
-			14411 Icarus Shooter {PvP} - Focus 3567-2; 
-			14414 Icarus Disperser - Confusion {PvP} - Focus 3567-2; 
-			14424 Icarus Shooter - Concentration {PvP} - Focus 3567-2; 
+			Guessing...
+			6594 Shining Bow - Focus 3567-1;
+			9387 Dynasty Crossbow - Focus 3567-2; Kamael exclusive weapon: Dynasty Bow Conversion Increases critical attack by 116. Increases damage inflicted during PvP.
+			9865 Dynasty Bow - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP.
+			9866 Dynasty Knife - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP.
+			10445 Icarus Spitter - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP.
+			10446 Icarus Disperser - Focus 3567-2; Increases Critical Attack by 116. Increases damage inflicted during PvP.
+			10469 Icarus Shooter - Focus 3567-2; Kamael exclusive weapon: Icarus Spitter Conversion Critical Attack is increased by 116. Increases damage inflicted during PvP.
+			10738 Draconic Bow {PvP} - Focus 3567-1;
+			10747 Sarunga - PvP - Focus 3567-1;
+			10762 Dynasty Knife {PvP} - Focus 3567-2;
+			10782 Dynasty Bow {PvP} - Focus 3567-2;
+			10791 Dynasty Crossbow - PvP - Focus 3567-2;
+			11200 Draconic Bow - Earth - Focus 3567-1;
+			11216 Sarunga - Earth - Focus 3567-1;
+			11248 Dynasty Knife - Great Gale - Focus 3567-2;
+			11267 Dynasty Bow - Great Gale - Focus 3567-2;
+			11291 Dynasty Crossbow - Great Gale - Focus 3567-2;
+			11302 Icarus Disperser - Confusion - Focus 3567-2;
+			11312 Icarus Shooter - Concentration - Focus 3567-2;
+			11324 Icarus Spitter - Concentration - Focus 3567-2;
+			12902 Draconic Bow - Earth {PvP} - Focus 3567-1;
+			12914 Sarunga - Earth {PvP} - Focus 3567-1;
+			12938 Dynasty Knife - Great Gale {PvP} - Focus 3567-2;
+			12953 Dynasty Bow - Great Gale {PvP} - Focus 3567-2;
+			12971 Dynasty Crossbow - Great Gale {PvP} - Focus 3567-2;
+			14387 Icarus Spitter {PvP} - Focus 3567-2;
+			14388 Icarus Disperser {PvP} - Focus 3567-2;
+			14411 Icarus Shooter {PvP} - Focus 3567-2;
+			14414 Icarus Disperser - Confusion {PvP} - Focus 3567-2;
+			14424 Icarus Shooter - Concentration {PvP} - Focus 3567-2;
 			14436 Icarus Spitter - Concentration {PvP} - Focus 3567-2;
 		-->
 		<table name="#rCrit"> 88.1 116 </table> <!-- Guessing Level 2, see notes. -->
@@ -900,26 +915,26 @@
 	<skill id="3568" levels="1" name="Special Ability: HP Drain">
 		<!-- s_opt_hp_drain75 -->
 		<!--
-			6584 Basalt Battlehammer - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			6591 Angel Slayer - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
+			6584 Basalt Battlehammer - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			6591 Angel Slayer - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
 			6598 Dragon Hunter Axe - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
 		-->
 		<!--
-			Guessing... 
-			10716 Basalt Battlehammer - PvP - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			10721 Dragon Hunter Axe - PvP - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			10723 Angel Slayer - PvP - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			11205 Dragon Hunter Axe - Lightning - HP Drain 3568 1 A Masterwork Item that increases critical rate. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			11211 Basalt Battlehammer - Concentration - HP Drain 3568 1 A Masterwork Item that increases Accuracy Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			11228 Angel Slayer - Concentration - HP Drain 3568 1 A Masterwork Item that increases Accuracy. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			12906 Dragon Hunter Axe - Lightning - HP Drain 3568 1 A Masterwork Item that increases P. Atk. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			12910 Basalt Battlehammer - Earth - HP Drain 3568 1 A Masterwork Item that increases HP Regeneration. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			12923 Angel Slayer - Concentration - HP Drain 3568 1 A Masterwork Item that increases Accuracy Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP. 
-			14128 Vesper Shaper - HP Drain 3568 1 
-			14136 Vesper Avenger - HP Drain 3568 1 
-			14141 Vesper Retributer - HP Drain 3568 1 
-			14488 Vesper Shaper {PvP} - HP Drain 3568 1 
-			14496 Vesper Avenger {PvP} - HP Drain 3568 1 
+			Guessing...
+			10716 Basalt Battlehammer - PvP - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			10721 Dragon Hunter Axe - PvP - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			10723 Angel Slayer - PvP - HP Drain 3568 1 Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			11205 Dragon Hunter Axe - Lightning - HP Drain 3568 1 A Masterwork Item that increases critical rate. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			11211 Basalt Battlehammer - Concentration - HP Drain 3568 1 A Masterwork Item that increases Accuracy Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			11228 Angel Slayer - Concentration - HP Drain 3568 1 A Masterwork Item that increases Accuracy. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			12906 Dragon Hunter Axe - Lightning - HP Drain 3568 1 A Masterwork Item that increases P. Atk. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			12910 Basalt Battlehammer - Earth - HP Drain 3568 1 A Masterwork Item that increases HP Regeneration. Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			12923 Angel Slayer - Concentration - HP Drain 3568 1 A Masterwork Item that increases Accuracy Restores 3% of melee damage inflicted upon the enemy to your own HP. Increases damage inflicted during PvP.
+			14128 Vesper Shaper - HP Drain 3568 1
+			14136 Vesper Avenger - HP Drain 3568 1
+			14141 Vesper Retributer - HP Drain 3568 1
+			14488 Vesper Shaper {PvP} - HP Drain 3568 1
+			14496 Vesper Avenger {PvP} - HP Drain 3568 1
 			14501 Vesper Retributer {PvP} - HP Drain 3568 1
 		-->
 		<set name="target" val="TARGET_SELF" />
@@ -935,20 +950,20 @@
 	<skill id="3569" levels="1" name="Special Ability: HP Regeneration">
 		<!-- s_opt_hp_regeneration75 -->
 		<!--
-			6586 Basalt Battlehammer - HP Regeneration 3569-1; 
+			6586 Basalt Battlehammer - HP Regeneration 3569-1;
 			6596 Dragon Hunter Axe - HP Regeneration 3569-1;
 		-->
 		<!--
-			Guessing... 
-			10718 Basalt Battlehammer {PvP} - HP Regeneration 3569-1; 
-			10719 Dragon Hunter Axe {PvP} - HP Regeneration 3569-1; 
-			11203 Dragon Hunter Axe - Thunder - HP Regeneration 3569-1; 
-			11213 Basalt Battlehammer - Concentration - HP Regeneration 3569-1; 
-			12904 Dragon Hunter Axe - Thunder {PvP} - HP Regeneration 3569-1; 
-			12912 Basalt Battlehammer - Concentration {PvP} - HP Regeneration 3569-1; 
-			14138 Vesper Avenger - HP Regeneration 3569-1; 
-			14139 Vesper Retributer - HP Regeneration 3569-1; 
-			14498 Vesper Avenger {PvP} - HP Regeneration 3569-1; 
+			Guessing...
+			10718 Basalt Battlehammer {PvP} - HP Regeneration 3569-1;
+			10719 Dragon Hunter Axe {PvP} - HP Regeneration 3569-1;
+			11203 Dragon Hunter Axe - Thunder - HP Regeneration 3569-1;
+			11213 Basalt Battlehammer - Concentration - HP Regeneration 3569-1;
+			12904 Dragon Hunter Axe - Thunder {PvP} - HP Regeneration 3569-1;
+			12912 Basalt Battlehammer - Concentration {PvP} - HP Regeneration 3569-1;
+			14138 Vesper Avenger - HP Regeneration 3569-1;
+			14139 Vesper Retributer - HP Regeneration 3569-1;
+			14498 Vesper Avenger {PvP} - HP Regeneration 3569-1;
 			14499 Vesper Retributer {PvP} - HP Regeneration 3569-1;
 		-->
 		<set name="target" val="TARGET_SELF" />
@@ -968,9 +983,9 @@
 			6580 Tallum Blade*Dark Legion's Edge 3570-1; P.Atk of dual swords will increase more than one-handed type weapon when enchanted. Max HP +15%, Max MP +20%, Max CP +30% when enchanted by 4 or more. Enhances damage to target during PvP.
 		-->
 		<!--
-			Guessing... 
-			10749 Tallum Blade*Dark Legion {PvP} 3570-1; 
-			11234 Tallum Blade*Dark Legion\'s Edge - Thunder 3570-1; 
+			Guessing...
+			10749 Tallum Blade*Dark Legion {PvP} 3570-1;
+			11234 Tallum Blade*Dark Legion\'s Edge - Thunder 3570-1;
 			12928 Tallum Blade*Dark Legion - Lightning {PvP} 3570-1;
 		-->
 		<set name="target" val="TARGET_SELF" />
@@ -992,11 +1007,11 @@
 			6604 Demon Splinter - Critical Stun 3571 1; Has a 27% chance of casting Stun on a critical attack. Increases damage inflicted during PvP.
 		-->
 		<!--
-			Guessing... 
-			10730 Demon Splinter - PvP - Critical Stun 3571 1; Has a 27% chance of casting Stun on a critical attack. Increases damage inflicted during PvP. 
-			11197 Demon Splinter - Lightning - Critical Stun 3571 1; A Masterwork Item that increases the critical impact. Has a 27% chance of casting Stun on a critical attack. Increases damage inflicted during PvP. 
-			12900 Demon Splinter - Lightning - Critical Stun 3571 1; A Masterwork Item that increases critical rate. Has a 27% chance to stun on a critical attack. Increases damage inflicted during PvP. 
-			14132 Vesper Fighter - Critical Stun 3571 1; Has a 43% chance of casting Stun on a critical attack. Increases damage inflicted during PvP. 
+			Guessing...
+			10730 Demon Splinter - PvP - Critical Stun 3571 1; Has a 27% chance of casting Stun on a critical attack. Increases damage inflicted during PvP.
+			11197 Demon Splinter - Lightning - Critical Stun 3571 1; A Masterwork Item that increases the critical impact. Has a 27% chance of casting Stun on a critical attack. Increases damage inflicted during PvP.
+			12900 Demon Splinter - Lightning - Critical Stun 3571 1; A Masterwork Item that increases critical rate. Has a 27% chance to stun on a critical attack. Increases damage inflicted during PvP.
+			14132 Vesper Fighter - Critical Stun 3571 1; Has a 43% chance of casting Stun on a critical attack. Increases damage inflicted during PvP.
 			14492 Vesper Fighter {PvP} - Critical Stun 3571 1; Has a 43% chance of casting Stun on a critical attack. Increases damage inflicted during PvP.
 		-->
 		<set name="target" val="TARGET_ONE" />
@@ -1014,10 +1029,10 @@
 	<skill id="3572" levels="2" name="Special Ability: Critical Damage">
 		<!-- s_opt_crt_damage75 -->
 		<!--
-			6590 Angel Slayer - Critical Damage 3572-1; Increases P. Atk. by 265 on a critical attack. Increases damage inflicted during PvP. 
-			10722 Angel Slayer - PvP - Critical Damage 3572-1; 
-			11227 Angel Slayer - Concentration - Critical Damage 3572-1; 
-			14127 Vesper Shaper - Critical Damage 3572-2; 
+			6590 Angel Slayer - Critical Damage 3572-1; Increases P. Atk. by 265 on a critical attack. Increases damage inflicted during PvP.
+			10722 Angel Slayer - PvP - Critical Damage 3572-1;
+			11227 Angel Slayer - Concentration - Critical Damage 3572-1;
+			14127 Vesper Shaper - Critical Damage 3572-2;
 			14487 Vesper Shaper {PvP} - Critical Damage 3572-2;
 		-->
 		<table name="#cAtkAdd"> 265 665 </table>
@@ -1036,19 +1051,19 @@
 	<skill id="3573" levels="3" name="Special Ability: Guidance">
 		<!-- s_opt_guidence75 -->
 		<!--
-			Guessing... 
-			9386 Dynasty Crossbow - Guidance 3573-1; Increases Accuracy by 5.32. 
-			9864 Dynasty Bow - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP. 
-			10444 Icarus Spitter - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP. 
-			10468 Icarus Shooter - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP. 
-			10781 Dynasty Bow - PvP - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP. 
-			11266 Dynasty Bow - Great Gale - Guidance 3573-1; A Masterwork Item that increases Atk. Spd. Increases Accuracy by 5.32. Increases damage inflicted during PvP. 
-			11311 Icarus Shooter - Concentration - Guidance 3573-1; A Masterwork Item that increases Accuracy. Kamael exclusive weapon: Icarus Spitter Conversion. Increases Accuracy by 5.32. Increases damage inflicted during PvP. 
-			11323 Icarus Spitter - Concentration - Guidance 3573-1; A Masterwork Item that increases Accuracy. Increases Accuracy by 5.32 on a critical attack. Increases damage inflicted during PvP. 
-			12952 Dynasty Bow - Great Gale - Guidance 3573-1; A Masterwork Item that increases Atk. Spd. Increases Accuracy by 5.32. Increases damage inflicted during PvP. 
-			14386 Icarus Spitter {PvP} - Guidance 3573-1; 
-			14410 Icarus Shooter {PvP} - Guidance 3573-1; 
-			14423 Icarus Shooter - Concentration {PvP} - Guidance 3573-1; 
+			Guessing...
+			9386 Dynasty Crossbow - Guidance 3573-1; Increases Accuracy by 5.32.
+			9864 Dynasty Bow - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP.
+			10444 Icarus Spitter - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP.
+			10468 Icarus Shooter - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP.
+			10781 Dynasty Bow - PvP - Guidance 3573-1; Increases Accuracy by 5.32. Increases damage inflicted during PvP.
+			11266 Dynasty Bow - Great Gale - Guidance 3573-1; A Masterwork Item that increases Atk. Spd. Increases Accuracy by 5.32. Increases damage inflicted during PvP.
+			11311 Icarus Shooter - Concentration - Guidance 3573-1; A Masterwork Item that increases Accuracy. Kamael exclusive weapon: Icarus Spitter Conversion. Increases Accuracy by 5.32. Increases damage inflicted during PvP.
+			11323 Icarus Spitter - Concentration - Guidance 3573-1; A Masterwork Item that increases Accuracy. Increases Accuracy by 5.32 on a critical attack. Increases damage inflicted during PvP.
+			12952 Dynasty Bow - Great Gale - Guidance 3573-1; A Masterwork Item that increases Atk. Spd. Increases Accuracy by 5.32. Increases damage inflicted during PvP.
+			14386 Icarus Spitter {PvP} - Guidance 3573-1;
+			14410 Icarus Shooter {PvP} - Guidance 3573-1;
+			14423 Icarus Shooter - Concentration {PvP} - Guidance 3573-1;
 			14435 Icarus Spitter - Concentration {PvP} - Guidance 3573-1;
 		-->
 		<table name="#accCombat"> 5.27 5.32 0 </table> <!-- Guessing Level 2/3 -->
@@ -1067,21 +1082,21 @@
 	<skill id="3574" levels="3" name="Special Ability: Critical Slow">
 		<!-- s_opt_crt_slow75 -->
 		<!--
-			6595 Shining Bow - Critical Slow 3574-1; 
+			6595 Shining Bow - Critical Slow 3574-1;
 			7578 Draconic Bow - Critical Slow 3574-1; Has a chance of casting Slow on a critical attack. Enhances damage to a target during PvP.
 		-->
 		<!--
-			Guessing... 
-			9375 Sarunga - Critical Slow 3574-1; Kamael Exclusive Weapon: Draconic Bow Conversion. Has a chance of casting Slow on a critical attack. Enhances damage to a target during PvP. 
-			10739 Draconic Bow {PvP} - Critical Slow 3574-1; Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP. 
-			10748 Sarunga - {PvP} - Critical Slow 3574-1; Kamael exclusive weapon: Draconic Bow Conversion. Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP. 
-			11201 Draconic Bow - Earth - Critical Slow 3574-1; A Masterwork Item that increases Max HP. Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP. 
-			11217 Sarunga - Earth - Critical Slow 3574-1; A Masterwork Item that increases Max HP. Kamael exclusive weapon: Draconic Bow Conversion. Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP. 
-			12903 Draconic Bow - Earth {PvP} - Critical Slow 3574-1; 
-			12915 Sarunga - Earth {PvP} - Critical Slow 3574-1; 
-			14150 Vesper Thrower - Critical Slow 3574-3; 
-			14156 Vesper Sheutjeh - Critical Slow 3574-3; 
-			14510 Vesper Thrower {PvP} - Critical Slow 3574-3; 
+			Guessing...
+			9375 Sarunga - Critical Slow 3574-1; Kamael Exclusive Weapon: Draconic Bow Conversion. Has a chance of casting Slow on a critical attack. Enhances damage to a target during PvP.
+			10739 Draconic Bow {PvP} - Critical Slow 3574-1; Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP.
+			10748 Sarunga - {PvP} - Critical Slow 3574-1; Kamael exclusive weapon: Draconic Bow Conversion. Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP.
+			11201 Draconic Bow - Earth - Critical Slow 3574-1; A Masterwork Item that increases Max HP. Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP.
+			11217 Sarunga - Earth - Critical Slow 3574-1; A Masterwork Item that increases Max HP. Kamael exclusive weapon: Draconic Bow Conversion. Has a chance of casting Slow on a critical attack. Increases damage inflicted during PvP.
+			12903 Draconic Bow - Earth {PvP} - Critical Slow 3574-1;
+			12915 Sarunga - Earth {PvP} - Critical Slow 3574-1;
+			14150 Vesper Thrower - Critical Slow 3574-3;
+			14156 Vesper Sheutjeh - Critical Slow 3574-3;
+			14510 Vesper Thrower {PvP} - Critical Slow 3574-3;
 			14516 Vesper Sheutjeh {PvP} - Critical Slow 3574-3;
 		-->
 		<table name="#magicLvl"> 75 80 80 </table> <!-- Guessing Level 2/3 -->
@@ -1103,10 +1118,10 @@
 		<!-- s_opt_empower75 -->
 		<!-- 6587 Imperial Staff - Empower 3575-1; -->
 		<!--
-			Guessing... 
-			10734 Imperial Staff {PvP} - Empower 3575-1; Increases M. Atk. by 60. Increases damage inflicted during PvP. 
-			11231 Imperial Staff - Nature - Empower 3575-1; A Masterwork Item that increases Max MP. Increases M. Atk. by 60. Increases damage inflicted during PvP. 
-			12925 Imperial Staff - Nature {PvP} - Empower 3575-1; A Masterwork Item that increases Max MP. M. Atk. increases by 60. Increases damage inflicted during PvP. 
+			Guessing...
+			10734 Imperial Staff {PvP} - Empower 3575-1; Increases M. Atk. by 60. Increases damage inflicted during PvP.
+			11231 Imperial Staff - Nature - Empower 3575-1; A Masterwork Item that increases Max MP. Increases M. Atk. by 60. Increases damage inflicted during PvP.
+			12925 Imperial Staff - Nature {PvP} - Empower 3575-1; A Masterwork Item that increases Max MP. M. Atk. increases by 60. Increases damage inflicted during PvP.
 			14145 Vesper Singer - Empower 3575-2;
 			14505 Vesper Singer {PvP} - Empower 3575-2;
 		-->
@@ -1126,20 +1141,20 @@
 	<skill id="3576" levels="2" name="Special Ability: MP Regeneration">
 		<!-- s_opt_mp_regeneration75 -->
 		<!--
-			6588 Imperial Staff - MP Regeneration 3576-1; 
+			6588 Imperial Staff - MP Regeneration 3576-1;
 			6609 Arcana Mace - MP Regeneration 3576-1;
 		-->
 		<!--
-			Guessing... 
-			10732 Arcana Mace {PvP} - MP Regeneration 3576-1; 
-			10735 Imperial Staff {PvP} - MP Regeneration 3576-1; 
-			11224 Arcana Mace - Nature - MP Regeneration 3576-1; 
-			11232 Imperial Staff - Nature - MP Regeneration 3576-1; 
-			12920 Arcana Mace - Nature {PvP} - MP Regeneration 3576-1; 
-			12926 Imperial Staff - Nature {PvP} - MP Regeneration 3576-1; 
-			14143 Vesper Caster - MP Regeneration 3576-2; 
-			14146 Vesper Singer - MP Regeneration 3576-2; 
-			14503 Vesper Caster {PvP} - MP Regeneration 3576-2; 
+			Guessing...
+			10732 Arcana Mace {PvP} - MP Regeneration 3576-1;
+			10735 Imperial Staff {PvP} - MP Regeneration 3576-1;
+			11224 Arcana Mace - Nature - MP Regeneration 3576-1;
+			11232 Imperial Staff - Nature - MP Regeneration 3576-1;
+			12920 Arcana Mace - Nature {PvP} - MP Regeneration 3576-1;
+			12926 Imperial Staff - Nature {PvP} - MP Regeneration 3576-1;
+			14143 Vesper Caster - MP Regeneration 3576-2;
+			14146 Vesper Singer - MP Regeneration 3576-2;
+			14503 Vesper Caster {PvP} - MP Regeneration 3576-2;
 			14506 Vesper Singer {PvP} - MP Regeneration 3576-2;
 		-->
 		<table name="#magicLvl"> 75 80 </table> <!-- Guessing Level 2 -->
@@ -1158,35 +1173,35 @@
 	<skill id="3577" levels="2" name="Special Ability: Magic Hold">
 		<!-- s_opt_magichold75 -->
 		<!--
-			Note: So far this is the only weapon SA that I have deviated from C4 data on. 
-			This is because C4 data was using skill 1201 for some of these, which is the player skill for dryad root. 
-			This seemed REALLY wrong. 
+			Note: So far this is the only weapon SA that I have deviated from C4 data on.
+			This is because C4 data was using skill 1201 for some of these, which is the player skill for dryad root.
+			This seemed REALLY wrong.
 			Instead of continuing to use that method, I have gone with a more logical method and all are using the same skill now.
 		-->
 		<!--
 			6589 Imperial Staff - Magic Hold 3577 1; Has a 20% chance of casting Dryad Root when using a magic skill on the target. Increases damage inflicted during PvP.
 		-->
 		<!--
-			Guessing... 
-			4866 Heavy Doom Hammer - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			4873 Cursed Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			4878 Paradia Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			4882 Sage's Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			4890 Deadman's Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			4899 Sprite's Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			7702 Stick of Faith - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			7712 Club of Nature - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			7811 Soulfire Dirk - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			8140 Ecliptic Axe - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			8143 Spell Breaker - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			10736 Imperial Staff {PvP} - Magic Hold 3577-1; Has a 20% chance of casting Dryad Root when using a magic skill on the target. Increases damage inflicted during PvP. 
-			10901 Spell Breaker - Hail - Magic Hold 3577-1; A rare item that increases M. Atk. Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			10919 Sprite's Staff - Hail - Magic Hold 3577-1; A rare item that increases M. Atk. Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1. 
-			11233 Imperial Staff - Nature - Magic Hold 3577-1; A rare item that increases maximum MP. Has a 20% chance of casting Dryad Root when using a magic skill on the target. Increases damage inflicted during PvP. 
-			12927 Imperial Staff - Nature {PvP} - Magic Hold 3577-1; A rare item that increases maximum MP. Has a 20% chance of casting Dryad Root when using a magic skill on the target. Increases damage inflicted during PvP. 
-			14126 Vesper Buster - Magic Hold 3577-1; 20% +pvp 
-			14147 Vesper Singer - Magic Hold 3577-1; 20% +pvp 
-			14486 Vesper Buster {PvP} - Magic Hold 3577-1; 20% +pvp 
+			Guessing...
+			4866 Heavy Doom Hammer - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			4873 Cursed Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			4878 Paradia Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			4882 Sage's Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			4890 Deadman's Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			4899 Sprite's Staff - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			7702 Stick of Faith - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			7712 Club of Nature - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			7811 Soulfire Dirk - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			8140 Ecliptic Axe - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			8143 Spell Breaker - Magic Hold 3577-1; Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			10736 Imperial Staff {PvP} - Magic Hold 3577-1; Has a 20% chance of casting Dryad Root when using a magic skill on the target. Increases damage inflicted during PvP.
+			10901 Spell Breaker - Hail - Magic Hold 3577-1; A rare item that increases M. Atk. Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			10919 Sprite's Staff - Hail - Magic Hold 3577-1; A rare item that increases M. Atk. Has a 10% chance of casting Dryad Root when using a magic skill on the target. Effect 1.
+			11233 Imperial Staff - Nature - Magic Hold 3577-1; A rare item that increases maximum MP. Has a 20% chance of casting Dryad Root when using a magic skill on the target. Increases damage inflicted during PvP.
+			12927 Imperial Staff - Nature {PvP} - Magic Hold 3577-1; A rare item that increases maximum MP. Has a 20% chance of casting Dryad Root when using a magic skill on the target. Increases damage inflicted during PvP.
+			14126 Vesper Buster - Magic Hold 3577-1; 20% +pvp
+			14147 Vesper Singer - Magic Hold 3577-1; 20% +pvp
+			14486 Vesper Buster {PvP} - Magic Hold 3577-1; 20% +pvp
 			14507 Vesper Singer {PvP} - Magic Hold 3577-1; 20% +pvp
 		-->
 		<set name="target" val="TARGET_ONE" />
