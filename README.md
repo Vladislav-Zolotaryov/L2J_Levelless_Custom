@@ -1,9 +1,11 @@
 ## TODO
 - Adjust drop rates
-- Disable Gracia
+- Disable Gracia (Make air ship controller to teleport to Tiad entrance)
 - Remove D, C, B Grade shops
 - Remove adventurer guide
-- Remove trade basic equip
+- Remove trade 'Buy basic equip'
+- Remove html 'Buy basic-type accessory'
+- Remove html 'Trade basic equip'
 - Remove Gludio Airship field
 - Remove Cube Fragments Shop
 - Review Epilogue Dynasty farm zones
@@ -16,7 +18,6 @@
 - Crypt of Disgrace
 - Fix Antharas
 - Remove instant HP an CP potions (elixirs are fine)
-- Remove html 'Buy basic-type accessory'
 - Remove npc with title 'Spellbook Seller'
 - ~~Disable Hellbound (Galate, Warpgate)~~
 - ~~Remove Pailaka~~
