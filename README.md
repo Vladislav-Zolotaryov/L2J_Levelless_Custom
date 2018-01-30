@@ -1,7 +1,6 @@
 ## TODO
 - Adjust drop rates
 - Disable Gracia
-- Disable Hellbound (Galate, Warpgate)
 - Remove D, C, B Grade shops
 - Remove adventurer guide
 - Remove trade basic equip
@@ -18,6 +17,8 @@
 - Fix Antharas
 - Remove instant HP an CP potions (elixirs are fine)
 - Remove html 'Buy basic-type accessory'
+- Remove npc with title 'Spellbook Seller'
+- ~~Disable Hellbound (Galate, Warpgate)~~
 - ~~Remove Pailaka~~
 - ~~Remove pathfinder worker~~
 - ~~Remove Try on~~
