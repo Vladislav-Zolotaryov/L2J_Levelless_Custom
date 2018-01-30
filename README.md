@@ -1,28 +1,30 @@
 ## TODO
 - Adjust drop rates
-- Disable Gracia and Hellbound
+- Disable Gracia
+- Disable Hellbound (Galate, Warpgate)
 - Remove D, C, B Grade shops
 - Remove adventurer guide
-- Remove pathfinder worker
-- Remove Try on
 - Remove trade basic equip
-- Remove fantasy Island (Move to fantasy isle)
 - Remove Gludio Airship field
 - Remove Cube Fragments Shop
-- Remove Kamaloka, Chamber of Delusions and Pailaka
+- Remove Pailaka
 - Review Epilogue Dynasty farm zones
 - Test Finshing rates
 - Trader Lorenzo
-- Newbie Guide
 - Castle learn special skills for low level
 - Test Siege
-- Check honorary item
+- Castle warehouse Check honorary item
 - Devil Isle survivor
 - Den of Evil
 - Crypt of Disgrace
 - Fix Antharas
 - Remove instant HP an CP potions (elixirs are fine)
 - Remove html 'Buy basic-type accessory'
+- ~~Remove pathfinder worker~~
+- ~~Remove Try on~~
+- ~~Remove Newbie Guide~~
+- ~~Remove fantasy Island (Move to fantasy isle)~~
+- ~~Remove Kamaloka, Chamber of Delusions~~
 - ~~Remove transformations into mobs~~
 - ~~Remove transformations books from shops~~
 - ~~Remove herb drop~~ Set drop rates to 0
